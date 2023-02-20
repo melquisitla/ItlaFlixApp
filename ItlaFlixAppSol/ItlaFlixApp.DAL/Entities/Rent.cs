@@ -3,7 +3,7 @@ using System;
 
 namespace ItlaFlixApp.DAL.Entities
 {
-    public class Rent : Movies
+    public abstract class Rent : Movies
     {
         public Rent() {
             this.Fecha = DateTime.Now;

@@ -2,7 +2,7 @@
 
 namespace ItlaFlixApp.DAL.Entities
 {
-    public class Gender : Descripcion
+    public abstract class Gender : Descripcion
     {
         //public int cod_genero { get; set; }
     }

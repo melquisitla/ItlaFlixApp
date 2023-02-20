@@ -2,7 +2,7 @@
 
 namespace ItlaFlixApp.DAL.Entities
 {
-    public class Movies : BaseEntity
+    public abstract class Movies : BaseEntity
     {
         public string? txt_descripcion { get; set; }
         public int cant_disponible_sale { get; set; }

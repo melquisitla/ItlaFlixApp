@@ -2,6 +2,7 @@
 using ItlaFlixApp.DAL.Entities;
 using ItlaFlixApp.DAL.Exceptions;
 using ItlaFlixApp.DAL.Interfaces;
+using ItlaFlixApp.DAL.Models;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,51 +13,52 @@ namespace ItlaFlixApp.DAL.Repositorios
 {
     public class UserRepositories : IUserRepository
     {
-        private readonly ItlaContext context;
-        private readonly ILogger<UserRepositories> logger;
+        /*        private readonly ItlaContext context;
+                private readonly ILogger<UserRepositories> logger;
 
-        public UserRepositories(ItlaContext context, ILogger<UserRepositories> logger) 
-        {
-            this.context = context;
-            this.logger = logger;
-        }
+                public UserRepositories(ItlaContext context, ILogger<UserRepositories> logger)
+                {
+                    this.context = context;
+                    this.logger = logger;
+                }*/
         public void Add(User user)
         {
-            try
-            {
-
-                if(this.context.Users.Any(cd => cd.cod_usuario == user.cod_usuario))
-                    throw new UserException("El Usuario ya se encuentra regitrado");
-
-                this.context.Users.Add(user);
-                this.context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-
-                this.logger.LogError($"Ocurrio un error {ex.Message}", ex.ToString());
-            }
-
+            throw new NotImplementedException();
         }
 
-        public void Delete(User user)
+        public bool Exists(int Name)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
-        public List<User> GetAll()
+        public User Get(int id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
+        }
+
+        public List<UserModel> GetAll()
+        {
+            return new List<UserModel>
+            {
+                new UserModel(){id=1, Nombre="Wesley",Apellido="Novas", Usuario = "wnovas69", Cedula="001-1234648-2",Rol="Usuario", Activo = true},
+                new UserModel(){id=2, Nombre="Wagner",Apellido="Jafet", Usuario = "wagner25", Cedula="001-1234649-2",Rol="Usuario" , Activo = true},
+                new UserModel(){id=3, Nombre="Melquis",Apellido="Mateo", Usuario = "mmateo01", Cedula="001-1164428-2",Rol="Usuario" , Activo = true},
+            };
+        }
+
+        public void Remove(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Save(User user)
+        {
+            throw new NotImplementedException();
         }
 
         public void Update(User user)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public User UserGet(int id)
-        {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

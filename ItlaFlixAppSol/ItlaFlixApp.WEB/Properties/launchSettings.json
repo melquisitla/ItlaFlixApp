@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:44010",
+      "applicationUrl": "http://localhost:3161",
       "sslPort": 0
     }
   },
@@ -17,6 +17,7 @@
     },
     "ItlaFlixApp.WEB": {
       "commandName": "Project",
+      "dotnetRunMessages": "true",
       "launchBrowser": true,
       "applicationUrl": "http://localhost:5000",
       "environmentVariables": {

@@ -1,10 +1,9 @@
-﻿using System;
-using ItlaFlixApp.DAL.Core;
-
+﻿
 namespace ItlaFlixApp.DAL.Entities
 {
-    public class User : Rol
+    public abstract class User : Rol
     {
+        internal int cod_sales;
         public string? Nombre { get; set; }
         public string? Apellido { get; set; }
         public string? Usuario { get; set; }
