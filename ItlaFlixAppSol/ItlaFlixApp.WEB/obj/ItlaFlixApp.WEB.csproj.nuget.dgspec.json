@@ -1,37 +1,36 @@
 {
   "format": 1,
   "restore": {
-    "C:\\projects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixApp.WEB\\ItlaFlixApp.WEB.csproj": {}
+    "C:\\Proyects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixAppSol\\ItlaFlixApp.WEB\\ItlaFlixApp.WEB.csproj": {}
   },
   "projects": {
-    "C:\\projects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixApp.WEB\\ItlaFlixApp.WEB.csproj": {
+    "C:\\Proyects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixAppSol\\ItlaFlixApp.DAL\\ItlaFlixApp.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\projects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixApp.WEB\\ItlaFlixApp.WEB.csproj",
-        "projectName": "ItlaFlixApp.WEB",
-        "projectPath": "C:\\projects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixApp.WEB\\ItlaFlixApp.WEB.csproj",
-        "packagesPath": "C:\\Users\\mmate\\.nuget\\packages\\",
-        "outputPath": "C:\\projects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixApp.WEB\\obj\\",
+        "projectUniqueName": "C:\\Proyects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixAppSol\\ItlaFlixApp.DAL\\ItlaFlixApp.DAL.csproj",
+        "projectName": "ItlaFlixApp.DAL",
+        "projectPath": "C:\\Proyects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixAppSol\\ItlaFlixApp.DAL\\ItlaFlixApp.DAL.csproj",
+        "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
+        "outputPath": "C:\\Proyects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixAppSol\\ItlaFlixApp.DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\mmate\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.1"
+          "netstandard2.1"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
             "projectReferences": {}
           }
         },
@@ -42,8 +41,81 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.32, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.32, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Proyects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixAppSol\\ItlaFlixApp.WEB\\ItlaFlixApp.WEB.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Proyects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixAppSol\\ItlaFlixApp.WEB\\ItlaFlixApp.WEB.csproj",
+        "projectName": "ItlaFlixApp.WEB",
+        "projectPath": "C:\\Proyects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixAppSol\\ItlaFlixApp.WEB\\ItlaFlixApp.WEB.csproj",
+        "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
+        "outputPath": "C:\\Proyects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixAppSol\\ItlaFlixApp.WEB\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "C:\\Proyects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixAppSol\\ItlaFlixApp.DAL\\ItlaFlixApp.DAL.csproj": {
+                "projectPath": "C:\\Proyects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixAppSol\\ItlaFlixApp.DAL\\ItlaFlixApp.DAL.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
           "imports": [
             "net461",
             "net462",

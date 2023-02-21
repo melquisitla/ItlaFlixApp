@@ -3,15 +3,15 @@ using System;
 
 namespace ItlaFlixApp.DAL.Entities
 {
-    public class Sale : Movies
+    public  class Sale : Movie
     {
         public Sale() {
             this.Fecha = DateTime.Now;
-            this.precio = this.precio_sale;
+            this.Precio = this.precio_venta;
         }
         public int cod_venta { get; set; }
         //public int cod_usuario { get; set; }
-        public float precio { get; set; }
+        public decimal Precio { get; set; }
         public DateTime Fecha { get; set; }
     }
 }

@@ -2,7 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\ItlaFlixAppSol",
+    "\\ItlaFlixAppSol\\ItlaFlixApp.DAL",
+    "\\ItlaFlixAppSol\\ItlaFlixApp.DAL\\Exceptions",
     "\\ItlaFlixAppSol\\ItlaFlixAppSol"
   ],
+  "SelectedNode": "\\ItlaFlixAppSol\\ItlaFlixApp.DAL\\obj",
   "PreviewInSolutionExplorer": false
 }

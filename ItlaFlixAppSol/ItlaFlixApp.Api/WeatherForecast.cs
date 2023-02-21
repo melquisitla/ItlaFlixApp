@@ -1,6 +1,6 @@
 using System;
 
-namespace ItlaFlixApp.Api
+namespace ItlaFlixApp.API
 {
     public class WeatherForecast
     {

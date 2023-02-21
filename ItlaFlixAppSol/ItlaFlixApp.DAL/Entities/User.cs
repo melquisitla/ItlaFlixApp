@@ -3,7 +3,7 @@ using ItlaFlixApp.DAL.Core;
 
 namespace ItlaFlixApp.DAL.Entities
 {
-    public class User : Rol
+    public abstract class User : Rol
     {
         public string? Nombre { get; set; }
         public string? Apellido { get; set; }
