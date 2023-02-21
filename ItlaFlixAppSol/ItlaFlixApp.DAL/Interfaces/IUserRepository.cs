@@ -7,11 +7,11 @@ namespace ItlaFlixApp.DAL.Interfaces
     public interface IUserRepository
     {
         List<UserModel> GetAll();
-        void Add(User user);
+        //void Add(User user);
         void Update(User user);
         void Save(User user);
         void Remove(User user);
         User Get(int id);
-        bool Exists(int Name);
+        bool Exists(string Name);
     }
 }

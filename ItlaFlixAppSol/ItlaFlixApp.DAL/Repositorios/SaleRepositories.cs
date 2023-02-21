@@ -1,54 +1,103 @@
-﻿using ItlaFlixApp.DAL.Context;
+﻿using System.Collections.Generic;
+using System.Linq;
+using ItlaFlixApp.DAL.Context;
 using ItlaFlixApp.DAL.Entities;
 using ItlaFlixApp.DAL.Interfaces;
 using ItlaFlixApp.DAL.Models;
-using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
+
 
 namespace ItlaFlixApp.DAL.Repositorios
 {
     public class SaleRepositories : ISaleRepository
     {
-        /*        private readonly ItlaContext context;
-                private readonly ILogger<SaleRepositories> logger;
+        private readonly ItlaContext _ItlaContext;
+        private readonly ILogger<SaleRepositories> _logger;
 
-                public SaleRepositories(ItlaContext context, ILogger<SaleRepositories> logger) 
-                { 
-                    this.context = context;
-                    this.logger = logger;
-                }*/
+        public SaleRepositories(ItlaContext ItlaContext, ILogger<SaleRepositories> logger)
+        {
+            _ItlaContext = ItlaContext;
+            _logger = logger;
+        }
+
         public void Add(Sale sale)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Sale saleToAdd = new Sale()
+                {
+                    id = sale.id,
+                    cod_pelicula= sale.cod_pelicula,
+                    precio= sale.precio,
+                    cod_usuario= sale.cod_usuario,  
+                    fecha = sale.fecha
+                };
+                _ItlaContext.tVentaPeliculas.Add(saleToAdd);
+                _ItlaContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error agregando el usuario {ex.Message}", ex.ToString());
+            }
+
         }
 
         public Sale Get(int id)
         {
-            throw new NotImplementedException();
+            return _ItlaContext.tVentaPeliculas.Find(id);
         }
 
         public List<SaleModel> GetAll()
         {
-            return new List<SaleModel>
+            var sales = _ItlaContext.tVentaPeliculas.Select(cd => new SaleModel()
             {
-                new SaleModel(){cod_venta = 1, Usuario = "wagner25", Titulo = "Wakanda Forever", Precio = 350.00F, Fecha = DateTime.Now},
-                new SaleModel(){cod_venta = 2, Usuario = "wnovas69", Titulo = "Rapido y Furioso 9", Precio = 250.00F, Fecha = DateTime.Now},
-                new SaleModel(){cod_venta = 3, Usuario = "mmateo01", Titulo = "Matrix Resurreccion", Precio = 150.00F, Fecha = DateTime.Now},
-            };
+                id = cd.id,
+                cod_pelicula = cd.cod_pelicula,
+                cod_usuario= cd.cod_usuario,
+                precio = cd.precio,
+                fecha = cd.fecha,
+            }).ToList();
+
+            return sales;
         }
 
         public void Remove(Sale sale)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Sale saleToRemove = this.Get(sale.id);
+                saleToRemove.id = sale.id;
+
+                _ItlaContext.tVentaPeliculas.Remove(saleToRemove);
+                _ItlaContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error removiendo el usuario {ex.Message}", ex.ToString());
+            }
         }
 
         public void Update(Sale sale)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Sale saleToUpdate = this.Get(sale.id);
+
+                saleToUpdate.cod_usuario = sale.cod_usuario;
+                saleToUpdate.id = sale.id;
+                saleToUpdate.cod_pelicula = sale.cod_pelicula;
+                saleToUpdate.precio = sale.precio;
+                saleToUpdate.fecha = DateTime.Now;
+
+                _ItlaContext.tVentaPeliculas.Update(saleToUpdate);
+                _ItlaContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error removiendo el usuario {ex.Message}", ex.ToString());
+            }
+
         }
     }
 }

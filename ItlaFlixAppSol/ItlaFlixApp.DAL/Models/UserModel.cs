@@ -2,13 +2,13 @@
 {
     public class UserModel
     {
-        public int id { get; set; }
-        public string? Nombre { get; set; }
-        public string? Apellido { get; set; }
-        public string? Usuario { get; set; }
-        public string? Cedula { get; set; }
-        public string? Rol { get; set; }
-        public bool? Activo { get; set;}
+        public int cod_usuario { get; set; }
+        public string? txt_nombre { get; set; }
+        public string? txt_apellido { get; set; }
+        public string? txt_user { get; set; }
+        public string? nro_doc { get; set; }
+        public int? cod_rol { get; set; }
+        public int? sn_activo { get; set;}
 
         public UserModel() 
         { 

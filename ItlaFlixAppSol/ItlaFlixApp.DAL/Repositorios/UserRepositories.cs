@@ -1,64 +1,116 @@
-﻿using ItlaFlixApp.DAL.Context;
+﻿using System.Collections.Generic;
+using System.Linq;
+using ItlaFlixApp.DAL.Context;
 using ItlaFlixApp.DAL.Entities;
 using ItlaFlixApp.DAL.Exceptions;
 using ItlaFlixApp.DAL.Interfaces;
 using ItlaFlixApp.DAL.Models;
-using Microsoft.EntityFrameworkCore.Internal;
-using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using Microsoft.Extensions.Logging;
+
 
 namespace ItlaFlixApp.DAL.Repositorios
 {
     public class UserRepositories : IUserRepository
     {
-        /*        private readonly ItlaContext context;
-                private readonly ILogger<UserRepositories> logger;
-
-                public UserRepositories(ItlaContext context, ILogger<UserRepositories> logger)
-                {
-                    this.context = context;
-                    this.logger = logger;
-                }*/
-        public void Add(User user)
+        private readonly ItlaContext _ItlaContext;
+        private readonly ILogger<UserRepositories> _logger;
+        
+        public UserRepositories(ItlaContext ItlaContext, ILogger<UserRepositories> logger)
         {
-            throw new NotImplementedException();
+            _ItlaContext = ItlaContext;
+            _logger = logger;
         }
 
-        public bool Exists(int Name)
+        public bool Exists(String Name)
         {
-            throw new NotImplementedException();
+            return _ItlaContext.tUsers.Any(cd => cd.txt_nombre == Name);
         }
 
-        public User Get(int id)
+        public User Get(int cod_usuario)
         {
-            throw new NotImplementedException();
+            return _ItlaContext.tUsers.Find(cod_usuario);
         }
 
         public List<UserModel> GetAll()
         {
-            return new List<UserModel>
-            {
-                new UserModel(){id=1, Nombre="Wesley",Apellido="Novas", Usuario = "wnovas69", Cedula="001-1234648-2",Rol="Usuario", Activo = true},
-                new UserModel(){id=2, Nombre="Wagner",Apellido="Jafet", Usuario = "wagner25", Cedula="001-1234649-2",Rol="Usuario" , Activo = true},
-                new UserModel(){id=3, Nombre="Melquis",Apellido="Mateo", Usuario = "mmateo01", Cedula="001-1164428-2",Rol="Usuario" , Activo = true},
-            };
+            
+            var users = _ItlaContext.tUsers.Select(cd => new UserModel()
+            {  
+                cod_usuario = cd.cod_usuario,
+                txt_nombre = cd.txt_nombre,
+                txt_apellido = cd.txt_apellido,
+                txt_user = cd.txt_user,
+                nro_doc = cd.nro_doc,
+                cod_rol = cd.cod_rol,
+                sn_activo = cd.sn_activo,
+
+            }).ToList();
+
+            return users;
         }
 
         public void Remove(User user)
         {
-            throw new NotImplementedException();
+            try
+            {
+                User userToRemove = this.Get(user.cod_usuario);
+                userToRemove.sn_activo = 0;
+
+                _ItlaContext.tUsers.Remove(userToRemove);
+                _ItlaContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error removiendo el usuario { ex.Message }", ex.ToString());
+            }
         }
 
         public void Save(User user)
         {
-            throw new NotImplementedException();
+            try
+            {
+                User userToAdd = new User()
+                {
+                    cod_usuario = user.cod_usuario,
+                    txt_nombre = user.txt_nombre,
+                    txt_apellido = user.txt_apellido,
+                    txt_password = user.txt_password,
+                    txt_user = user.txt_user,
+                    nro_doc = user.nro_doc,
+                    cod_rol = user.cod_rol,
+                    sn_activo= user.sn_activo,
+                };
+                _ItlaContext.tUsers.Add(userToAdd);
+                _ItlaContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error guardando el usuario {ex.Message}", ex.ToString());
+            }
         }
 
         public void Update(User user)
         {
-            throw new NotImplementedException();
+            try
+            {
+                User userToUpdate = this.Get(user.cod_usuario);
+                userToUpdate.cod_usuario = user.cod_usuario;
+                userToUpdate.cod_rol = user.cod_rol;
+                userToUpdate.txt_nombre = user.txt_nombre;
+                userToUpdate.txt_apellido = user.txt_apellido;
+                userToUpdate.nro_doc = user.nro_doc;
+                userToUpdate.txt_user = user.txt_user;
+                userToUpdate.sn_activo = user.sn_activo;
+
+                _ItlaContext.tUsers.Update(userToUpdate);
+                _ItlaContext.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error actualizando el usuario {ex.Message}", ex.ToString());
+            }
         }
     }
 }

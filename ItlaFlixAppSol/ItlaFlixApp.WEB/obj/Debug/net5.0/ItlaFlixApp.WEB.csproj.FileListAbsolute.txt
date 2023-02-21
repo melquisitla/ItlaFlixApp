@@ -70,3 +70,4 @@ C:\Projects\ItlaFlixApp\ItlaFlixAppSol\ItlaFlixApp.WEB\obj\Debug\net5.0\refint\I
 C:\Projects\ItlaFlixApp\ItlaFlixAppSol\ItlaFlixApp.WEB\obj\Debug\net5.0\ItlaFlixApp.WEB.pdb
 C:\Projects\ItlaFlixApp\ItlaFlixAppSol\ItlaFlixApp.WEB\obj\Debug\net5.0\ItlaFlixApp.WEB.genruntimeconfig.cache
 C:\Projects\ItlaFlixApp\ItlaFlixAppSol\ItlaFlixApp.WEB\obj\Debug\net5.0\ref\ItlaFlixApp.WEB.dll
+C:\projects\ItlaFlixApp\ItlaFlixAppSol\ItlaFlixApp.WEB\bin\Debug\net5.0\Microsoft.VisualStudio.Web.CodeGeneration.Contracts.dll

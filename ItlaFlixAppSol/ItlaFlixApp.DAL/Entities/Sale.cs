@@ -1,17 +1,18 @@
 ﻿using ItlaFlixApp.DAL.Core;
 using System;
+using System.Runtime.CompilerServices;
 
 namespace ItlaFlixApp.DAL.Entities
 {
-    public abstract class Sale : Movies
+    public class Sale 
     {
         public Sale() {
-            this.Fecha = DateTime.Now;
-            this.precio = this.precio_sale;
-        }
-        public int? cod_venta { get; set; }
-        //public int cod_usuario { get; set; }
-        public float precio { get; set; }
-        public DateTime Fecha { get; set; }
+            this.fecha = DateTime.Now;
+         }
+        public int id { get; set; }
+        public int cod_pelicula { get; set; }
+        public int cod_usuario { get; set; }
+        public decimal precio { get; set; }
+        public DateTime fecha { get; set; }
     }
 }

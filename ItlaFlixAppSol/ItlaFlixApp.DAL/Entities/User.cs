@@ -1,13 +1,15 @@
 ﻿
 namespace ItlaFlixApp.DAL.Entities
 {
-    public abstract class User : Rol
+    public class User 
     {
-        internal int cod_sales;
-        public string? Nombre { get; set; }
-        public string? Apellido { get; set; }
-        public string? Usuario { get; set; }
-        public string? Password { get; set; }
-        public string? id_Documento { get; set; }
+        public int cod_usuario { get; set; }
+        public string? txt_user { get; set; }
+        public string? txt_password { get; set; }
+        public string? txt_nombre { get; set; }
+        public string? txt_apellido { get; set; }
+        public string? nro_doc { get; set; }
+        public int? cod_rol { get; set; }
+        public int? sn_activo { get; set; }
     }
 }

@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Projects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixApp.API\\ItlaFlixApp.API.csproj": {}
+    "C:\\projects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixApp.API\\ItlaFlixApp.API.csproj": {}
   },
   "projects": {
-    "C:\\Projects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixApp.API\\ItlaFlixApp.API.csproj": {
+    "C:\\projects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixApp.API\\ItlaFlixApp.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixApp.API\\ItlaFlixApp.API.csproj",
+        "projectUniqueName": "C:\\projects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixApp.API\\ItlaFlixApp.API.csproj",
         "projectName": "ItlaFlixApp.API",
-        "projectPath": "C:\\Projects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixApp.API\\ItlaFlixApp.API.csproj",
-        "packagesPath": "C:\\Users\\Melquis\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixApp.API\\obj\\",
+        "projectPath": "C:\\projects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixApp.API\\ItlaFlixApp.API.csproj",
+        "packagesPath": "C:\\Users\\mmate\\.nuget\\packages\\",
+        "outputPath": "C:\\projects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixApp.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Melquis\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mmate\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,14 +26,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Projects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixApp.DAL\\ItlaFlixApp.DAL.csproj": {
-                "projectPath": "C:\\Projects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixApp.DAL\\ItlaFlixApp.DAL.csproj"
+              "C:\\projects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixApp.DAL\\ItlaFlixApp.DAL.csproj": {
+                "projectPath": "C:\\projects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixApp.DAL\\ItlaFlixApp.DAL.csproj"
               }
             }
           }
@@ -76,20 +77,20 @@
         }
       }
     },
-    "C:\\Projects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixApp.DAL\\ItlaFlixApp.DAL.csproj": {
+    "C:\\projects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixApp.DAL\\ItlaFlixApp.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixApp.DAL\\ItlaFlixApp.DAL.csproj",
+        "projectUniqueName": "C:\\projects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixApp.DAL\\ItlaFlixApp.DAL.csproj",
         "projectName": "ItlaFlixApp.DAL",
-        "projectPath": "C:\\Projects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixApp.DAL\\ItlaFlixApp.DAL.csproj",
-        "packagesPath": "C:\\Users\\Melquis\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixApp.DAL\\obj\\",
+        "projectPath": "C:\\projects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixApp.DAL\\ItlaFlixApp.DAL.csproj",
+        "packagesPath": "C:\\Users\\mmate\\.nuget\\packages\\",
+        "outputPath": "C:\\projects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixApp.DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Melquis\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mmate\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -98,6 +99,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

@@ -1,4 +1,5 @@
-﻿using ItlaFlixApp.DAL.Interfaces;
+﻿using ItlaFlixApp.DAL.Entities;
+using ItlaFlixApp.DAL.Interfaces;
 using ItlaFlixApp.DAL.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -26,27 +27,35 @@ namespace ItlaFlixApp.API.Controllers
 
         // GET api/<SaleController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
-            return "value";
+            var sale = _saleRepository.Get(id);
+            return Ok(sale);
         }
 
         // POST api/<SaleController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost("SaveSale")]
+        public IActionResult Post([FromBody] Sale sale)
+
         {
+            _saleRepository.Add(sale);
+               return Ok();
         }
 
         // PUT api/<SaleController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("UpdateSale")]
+        public IActionResult Put([FromBody] Sale sale)
         {
+            _saleRepository.Update(sale);
+            return Ok();
         }
 
         // DELETE api/<SaleController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("RemoveSale")]
+        public IActionResult Remove([FromBody] Sale sale)
         {
+            _saleRepository.Remove(sale);
+            return Ok();
         }
     }
 }
