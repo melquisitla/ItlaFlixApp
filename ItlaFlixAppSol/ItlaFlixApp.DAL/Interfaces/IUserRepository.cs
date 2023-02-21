@@ -11,7 +11,7 @@ namespace ItlaFlixApp.DAL.Interfaces
         void Update(User user);
         void Save(User user);
         void Remove(User user);
-        User Get(int id);
+        User Get(int cod_usuario);
         bool Exists(string Name);
     }
 }

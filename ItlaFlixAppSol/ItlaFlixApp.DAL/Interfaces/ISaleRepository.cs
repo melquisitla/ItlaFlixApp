@@ -7,7 +7,7 @@ namespace ItlaFlixApp.DAL.Interfaces
     public interface ISaleRepository
     {
         List<SaleModel> GetAll();
-        void Add(Sale sale);
+        void Save(Sale sale);
         void Update(Sale sale);
         void Remove(Sale sale);
         Sale Get(int id);

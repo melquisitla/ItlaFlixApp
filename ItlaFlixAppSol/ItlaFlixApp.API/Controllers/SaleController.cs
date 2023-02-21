@@ -36,10 +36,9 @@ namespace ItlaFlixApp.API.Controllers
         // POST api/<SaleController>
         [HttpPost("SaveSale")]
         public IActionResult Post([FromBody] Sale sale)
-
         {
-            _saleRepository.Add(sale);
-               return Ok();
+            _saleRepository.Save(sale);
+            return Ok();
         }
 
         // PUT api/<SaleController>/5

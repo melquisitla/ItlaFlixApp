@@ -1,8 +1,11 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
+
 namespace ItlaFlixApp.DAL.Entities
 {
     public class User 
     {
+        [Key]
         public int cod_usuario { get; set; }
         public string? txt_user { get; set; }
         public string? txt_password { get; set; }

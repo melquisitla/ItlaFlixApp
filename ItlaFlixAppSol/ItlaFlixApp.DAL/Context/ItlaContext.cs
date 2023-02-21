@@ -16,10 +16,10 @@ namespace ItlaFlixApp.DAL.Context
         {
 
         }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+/*        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasNoKey();
-        }
+        }*/
         #region "Sales"
         public DbSet<Sale> tVentaPeliculas { get; set; }
         public DbSet<User> tUsers { get; set; }

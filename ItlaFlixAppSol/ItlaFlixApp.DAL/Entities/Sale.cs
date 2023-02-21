@@ -1,6 +1,4 @@
-﻿using ItlaFlixApp.DAL.Core;
-using System;
-using System.Runtime.CompilerServices;
+﻿using System;
 
 namespace ItlaFlixApp.DAL.Entities
 {

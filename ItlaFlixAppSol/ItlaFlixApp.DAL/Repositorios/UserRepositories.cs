@@ -2,11 +2,10 @@
 using System.Linq;
 using ItlaFlixApp.DAL.Context;
 using ItlaFlixApp.DAL.Entities;
-using ItlaFlixApp.DAL.Exceptions;
 using ItlaFlixApp.DAL.Interfaces;
 using ItlaFlixApp.DAL.Models;
-using System;
 using Microsoft.Extensions.Logging;
+using System;
 
 
 namespace ItlaFlixApp.DAL.Repositorios
@@ -29,8 +28,8 @@ namespace ItlaFlixApp.DAL.Repositorios
 
         public User Get(int cod_usuario)
         {
-            return _ItlaContext.tUsers.Find(cod_usuario);
-        }
+          return  _ItlaContext.tUsers.Find(cod_usuario);
+        } 
 
         public List<UserModel> GetAll()
         {
@@ -55,7 +54,6 @@ namespace ItlaFlixApp.DAL.Repositorios
             try
             {
                 User userToRemove = this.Get(user.cod_usuario);
-                userToRemove.sn_activo = 0;
 
                 _ItlaContext.tUsers.Remove(userToRemove);
                 _ItlaContext.SaveChanges();
@@ -72,7 +70,6 @@ namespace ItlaFlixApp.DAL.Repositorios
             {
                 User userToAdd = new User()
                 {
-                    cod_usuario = user.cod_usuario,
                     txt_nombre = user.txt_nombre,
                     txt_apellido = user.txt_apellido,
                     txt_password = user.txt_password,
@@ -81,6 +78,7 @@ namespace ItlaFlixApp.DAL.Repositorios
                     cod_rol = user.cod_rol,
                     sn_activo= user.sn_activo,
                 };
+
                 _ItlaContext.tUsers.Add(userToAdd);
                 _ItlaContext.SaveChanges();
             }

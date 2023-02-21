@@ -21,20 +21,21 @@ namespace ItlaFlixApp.DAL.Repositorios
             _logger = logger;
         }
 
-        public void Add(Sale sale)
+        public void Save(Sale sale)
         {
             try
             {
                 Sale saleToAdd = new Sale()
                 {
-                    id = sale.id,
-                    cod_pelicula= sale.cod_pelicula,
-                    precio= sale.precio,
-                    cod_usuario= sale.cod_usuario,  
-                    fecha = sale.fecha
+                    cod_usuario = sale.cod_usuario,
+                    cod_pelicula = sale.cod_pelicula,
+                    precio = sale.precio,
+                    fecha = DateTime.Now,
                 };
+
                 _ItlaContext.tVentaPeliculas.Add(saleToAdd);
                 _ItlaContext.SaveChanges();
+
             }
             catch (Exception ex)
             {
