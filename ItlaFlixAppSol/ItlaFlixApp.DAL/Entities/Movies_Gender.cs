@@ -1,9 +1,12 @@
 ﻿using ItlaFlixApp.DAL.Core;
+using System.ComponentModel.DataAnnotations;
 
 namespace ItlaFlixApp.DAL.Entities
 {
-    public class Movies_Gender : BaseEntity
+    public class Movies_Gender 
     {
-        //public int cod_genero { get; set; }
+        [Key]
+        public int cod_genero { get; set; }
+        public int cod_pelicula { get; set; }
     }
 }

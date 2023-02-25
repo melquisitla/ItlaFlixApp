@@ -25,11 +25,11 @@ namespace ItlaFlixApp.DAL.Repositorios
             try
             {
 
-                if(this.context.Users.Any(cd => cd.cod_usuario == user.cod_usuario))
-                    throw new UserException("El Usuario ya se encuentra regitrado");
+              //  if(this.context.Users.Any(cd => cd.cod_usuario == user.cod_usuario))
+              //      throw new UserException("El Usuario ya se encuentra regitrado");
 
-                this.context.Users.Add(user);
-                this.context.SaveChanges();
+                //this.context.Users.Add(user);
+                //this.context.SaveChanges();
             }
             catch (Exception ex)
             {
