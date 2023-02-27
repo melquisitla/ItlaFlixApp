@@ -20,7 +20,7 @@ namespace ItlaFlixApp.DAL.Context
         {
             modelBuilder.Entity<User>().HasNoKey();
         }*/
-        #region "Sales"
+        #region "Registros"
         public DbSet<Sale> tVentaPeliculas { get; set; }
         public DbSet<User> tUsers { get; set; }
         #endregion

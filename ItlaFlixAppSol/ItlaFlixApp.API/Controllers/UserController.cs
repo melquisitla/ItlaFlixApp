@@ -19,16 +19,17 @@ namespace ItlaFlixApp.API.Controllers
         }
         // GET: api/<UserController>
         [HttpGet]
-        public IEnumerable<UserModel> Get()
+        public IActionResult Get()
         {
-            return _userRepository.GetAll();
+            var users = _userRepository.GetEntities();
+            return Ok(users);
         }
 
         // GET api/<UserController>/5
         [HttpGet("{cod_usuario}")]
         public IActionResult Get(int cod_usuario)
         {
-            var user = _userRepository.Get(cod_usuario);
+            var user = _userRepository.GetEntity(cod_usuario);
             return Ok(user);
         }
 

@@ -20,16 +20,17 @@ namespace ItlaFlixApp.API.Controllers
         }
         // GET: api/<SaleController>
         [HttpGet]
-        public IEnumerable<SaleModel> Get()
+        public IActionResult Get()
         {
-            return _saleRepository.GetAll();
+            var sales = _saleRepository.GetEntities();
+            return Ok(sales);
         }
 
         // GET api/<SaleController>/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var sale = _saleRepository.Get(id);
+            var sale = _saleRepository.GetEntity(id);
             return Ok(sale);
         }
 
