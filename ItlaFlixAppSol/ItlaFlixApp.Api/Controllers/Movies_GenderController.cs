@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using ItlaFlixApp.DAL.Entities;
 using ItlaFlixApp.DAL.Model;
 using System.Reflection;
+using System.Linq;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -15,22 +16,23 @@ namespace ItlaFlixApp.API.Controllers
     {
         private readonly IMovies_GenderRepository _movies_genderRepository;
 
-        public Movies_GenderController(IMovies_GenderRepository genderRepository)
+        public Movies_GenderController(IMovies_GenderRepository moviegenderRepository)
         {
-            _movies_genderRepository = genderRepository;
+            _movies_genderRepository = moviegenderRepository;
         }
         // GET: api/<Movies_GenderController>
         [HttpGet]
-        public IEnumerable<Movie_GenderModel> Get()
+        public IActionResult Get()
         {
-            return _movies_genderRepository.GetAll();
+            var movieGender = _movies_genderRepository.GetEntities();
+            return Ok(movieGender);
         }
 
         // GET api/<Movies_GenderController>/5
         [HttpGet("{id}")]
         public IActionResult Get(int cod_genero)
         {
-            var movie = _movies_genderRepository.Get(cod_genero);
+            var movie = _movies_genderRepository.GetEntity(cod_genero);
             return Ok(movie);
         }
 
@@ -38,7 +40,7 @@ namespace ItlaFlixApp.API.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] Movies_Gender gender)
         {
-            _movies_genderRepository.Add(gender);
+            _movies_genderRepository.Save(gender);
             return Ok();
         }
 
@@ -54,7 +56,7 @@ namespace ItlaFlixApp.API.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete([FromBody] Movies_Gender gender)
         {
-            _movies_genderRepository.Delete(gender);
+            _movies_genderRepository.Remove(gender);
             return Ok();
         }
     }

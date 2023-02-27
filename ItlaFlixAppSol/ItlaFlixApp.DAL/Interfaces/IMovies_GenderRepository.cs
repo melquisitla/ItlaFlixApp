@@ -6,15 +6,8 @@ using System.Text;
 
 namespace ItlaFlixApp.DAL.Interfaces
 {
-    public interface IMovies_GenderRepository
+    public interface IMovies_GenderRepository : Core.IRepositoryBase<Movies_Gender>
     {
-        void Add(Movies_Gender movieGender);
-        void Update(Movies_Gender movieGender);
-        void Delete(Movies_Gender movieGender);
-
-        Movies_Gender Get(int id);
-        bool Exists(string txt_desc);
-
-        List<Movie_GenderModel> GetAll(); 
+        
     }
 }
