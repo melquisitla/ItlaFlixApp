@@ -4,8 +4,9 @@
     "\\ItlaFlixAppSol",
     "\\ItlaFlixAppSol\\ItlaFlixApp.DAL",
     "\\ItlaFlixAppSol\\ItlaFlixApp.DAL\\Exceptions",
+    "\\ItlaFlixAppSol\\ItlaFlixApp.DAL\\Repositorios",
     "\\ItlaFlixAppSol\\ItlaFlixAppSol"
   ],
-  "SelectedNode": "\\ItlaFlixAppSol\\ItlaFlixApp.DAL\\obj",
+  "SelectedNode": "\\ItlaFlixAppSol\\ItlaFlixApp.DAL\\Repositorios\\MovieRepositories.cs",
   "PreviewInSolutionExplorer": false
 }

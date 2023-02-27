@@ -6,7 +6,8 @@ namespace ItlaFlixApp.DAL.Context
     public class ItlaContext : DbContext
     {
        
-        public ItlaContext() { }
+        public ItlaContext() {
+        }
         public ItlaContext(DbContextOptions<ItlaContext> options) : base(options) 
         { 
          

@@ -43,7 +43,6 @@ C:\Proyects\ItlaFlixApp\ItlaFlixAppSol\ItlaFlixAppSol\ItlaFlixApp.API\obj\Debug\
 C:\Proyects\ItlaFlixApp\ItlaFlixAppSol\ItlaFlixAppSol\ItlaFlixApp.API\obj\Debug\net5.0\ItlaFlixApp.API.AssemblyInfoInputs.cache
 C:\Proyects\ItlaFlixApp\ItlaFlixAppSol\ItlaFlixAppSol\ItlaFlixApp.API\obj\Debug\net5.0\ItlaFlixApp.API.AssemblyInfo.cs
 C:\Proyects\ItlaFlixApp\ItlaFlixAppSol\ItlaFlixAppSol\ItlaFlixApp.API\obj\Debug\net5.0\ItlaFlixApp.API.csproj.CoreCompileInputs.cache
-C:\Proyects\ItlaFlixApp\ItlaFlixAppSol\ItlaFlixAppSol\ItlaFlixApp.API\obj\Debug\net5.0\ItlaFlixApp.API.MvcApplicationPartsAssemblyInfo.cs
 C:\Proyects\ItlaFlixApp\ItlaFlixAppSol\ItlaFlixAppSol\ItlaFlixApp.API\obj\Debug\net5.0\ItlaFlixApp.API.MvcApplicationPartsAssemblyInfo.cache
 C:\Proyects\ItlaFlixApp\ItlaFlixAppSol\ItlaFlixAppSol\ItlaFlixApp.API\obj\Debug\net5.0\scopedcss\bundle\ItlaFlixApp.API.styles.css
 C:\Proyects\ItlaFlixApp\ItlaFlixAppSol\ItlaFlixAppSol\ItlaFlixApp.API\obj\Debug\net5.0\staticwebassets\ItlaFlixApp.API.StaticWebAssets.Manifest.cache

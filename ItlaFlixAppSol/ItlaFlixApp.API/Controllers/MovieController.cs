@@ -20,16 +20,17 @@ namespace ItlaFlixApp.API.Controllers
         }
         // GET: api/<MovieController>
         [HttpGet]
-        public IEnumerable<MovieModel> Get()
+        public IActionResult Get()
         {
-            return _movieRepository.GetAll();
+            var movies = _movieRepository.GetEntities();
+            return Ok(movies);
         }
 
         // GET api/<MovieController>/5
         [HttpGet("cod_pelicula")]
         public IActionResult Get(int cod_pelicula)
         {
-            var movie = _movieRepository.Get(cod_pelicula);
+            var movie = _movieRepository.GetEntity(cod_pelicula);
             return Ok(movie);
         }
 

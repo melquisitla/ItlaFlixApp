@@ -20,17 +20,18 @@ namespace ItlaFlixApp.API.Controllers
         }
         // GET: api/<GenderController>
         [HttpGet]
-        public IEnumerable<GenderModel> Get()
+        public IActionResult Get()
         {
-            return _genderRepository.GetAll();
+           var genders = _genderRepository.GetEntities();
+            return Ok(genders);
         }
 
         // GET api/<GenderController>/5
         [HttpGet("cod_genero")]
         public IActionResult Get(int cod_genero)
         {
-            var movie = _genderRepository.Get(cod_genero);
-            return Ok(movie);
+            var gender = _genderRepository.GetEntity(cod_genero);
+            return Ok(gender);
         }
 
         // POST api/<GenderController>
