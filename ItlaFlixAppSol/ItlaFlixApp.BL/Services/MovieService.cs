@@ -1,0 +1,69 @@
+﻿using ItlaFlixApp.BL.Contract;
+using ItlaFlixApp.BL.Core;
+using ItlaFlixApp.BL.Dtos.Movie;
+using ItlaFlixApp.BL.Models;
+using ItlaFlixApp.DAL.Interfaces;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Linq;
+
+namespace ItlaFlixApp.BL.Services
+{
+    public class MovieService : IMovieServices
+    {
+        private readonly IMovieRepository movieRepository;
+        private readonly ILogger<MovieService> logger;
+
+        public MovieService(IMovieRepository movieRepository, 
+                            ILogger<MovieService> logger) 
+        {
+            this.movieRepository = movieRepository;
+            this.logger = logger;
+        }
+        public ServiceResult GetAll()
+        {
+           ServiceResult result = new ServiceResult();
+
+            try
+            {
+                var movies = this.movieRepository.GetEntities().Select(cd => new MovieResultModel() 
+                {
+                  txt_desc = cd.txt_desc,
+                  precio_venta = cd.precio_venta,
+                  precio_alquiler = cd.precio_alquiler,
+                  cod_Peliculas = cd.cod_pelicula,
+                  cant_disponibles_alquiler = cd.cant_disponibles_alquiler,
+                  cant_disponibles_venta = cd.cant_disponibles_venta
+                }).ToList();
+
+            }
+            catch (Exception ex)
+            {
+                result.Message = "Ocurrio un error obteniendo la pelicula";
+                result.Success = false;
+                this.logger.LogError($" {result.Message} ", ex.ToString());
+            }
+            return result;
+        }
+
+        public ServiceResult GetById(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public ServiceResult RemoveMovie(MovieRemoveDto removeDto)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public ServiceResult SaveMovie(MovieSaveDto saveDto)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public ServiceResult UpdateMovie(MovieUpdateDto updateDto)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+}

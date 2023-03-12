@@ -47,6 +47,7 @@ namespace ItlaFlixApp.API.Controllers
         public IActionResult Put( [FromBody] Movie movie)
         {
             _movieRepository.Update(movie);
+            _movieRepository.SaveChanges();
             return Ok();
         }
 

@@ -18,8 +18,13 @@ namespace ItlaFlixApp.DAL.Repositorios
         {
             _itlacontext = itlacontext;
             _logger = logger;
-        } 
+        }
 
+        public override void Add(Movie entity)
+        {
+            base.Add(entity);   
+            base.SaveChanges();
+        }
     }
 }
 
