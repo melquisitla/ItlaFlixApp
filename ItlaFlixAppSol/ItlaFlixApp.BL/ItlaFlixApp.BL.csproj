@@ -5,4 +5,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Exceptions\" />
+    <Folder Include="Validations\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ItlaFlixApp.DAL\ItlaFlixApp.DAL.csproj" />
+  </ItemGroup>
+
 </Project>
