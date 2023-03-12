@@ -2,6 +2,8 @@
 using ItlaFlixApp.BL.Core;
 using ItlaFlixApp.BL.Dtos.Gender;
 using ItlaFlixApp.BL.Models;
+using ItlaFlixApp.DAL.Entities;
+using ItlaFlixApp.DAL.Exceptions;
 using ItlaFlixApp.DAL.Interfaces;
 using Microsoft.Extensions.Logging;
 using System;
@@ -76,14 +78,15 @@ namespace ItlaFlixApp.BL.Services
 
             try
             {
-                var genders = this.genderRepository.GetEntities().Select(cd => new GenderResultModel()
-                {
-                    txt_desc = cd.txt_desc,
-                    cod_genero = cd.cod_genero,
+                Gender genderToRemove = this.genderRepository.GetEntity(removeDto.cod_genero);
+                genderToRemove.cod_genero = removeDto.cod_genero;
 
-                }).ToList();
-                result.Data = genders;
+                result.Data = genderToRemove;
                 result.Success = true;
+                this.genderRepository.Delete(genderToRemove);
+                this.genderRepository.SaveChanges();
+                result.Success = true;
+                result.Message = "El genero ha sido eliminado correctamente. ";
             }
             catch (Exception ex)
             {
@@ -100,14 +103,22 @@ namespace ItlaFlixApp.BL.Services
 
             try
             {
-                var genders = this.genderRepository.GetEntities().Select(cd => new GenderResultModel()
+                Gender gender = new Gender()
                 {
-                    txt_desc = cd.txt_desc,
-                    cod_genero = cd.cod_genero,
-
-                }).ToList();
-                result.Data = genders;
+                    txt_desc = saveDto.txt_desc
+                   
+                };
+                this.genderRepository.Save(gender);
+                this.genderRepository.SaveChanges();
                 result.Success = true;
+                result.Message = "El genero ha sido agregado correctamente. ";
+            }
+            catch (GenderDataException sdex)
+            {
+                result.Message = sdex.Message;
+                result.Success = false;
+                this.logger.LogError($"{result.Message}", sdex.ToString());
+
             }
             catch (Exception ex)
             {
@@ -124,14 +135,19 @@ namespace ItlaFlixApp.BL.Services
 
             try
             {
-                var genders = this.genderRepository.GetEntities().Select(cd => new GenderResultModel()
-                {
-                    txt_desc = cd.txt_desc,
-                    cod_genero = cd.cod_genero,
+                Gender gender = this.genderRepository.GetEntity(updateDto.cod_genero);
+                gender.txt_desc = updateDto.txt_desc;
 
-                }).ToList();
-                result.Data = genders;
+                this.genderRepository.Update(gender);
                 result.Success = true;
+                result.Message = "El genero ha sido actualizado correctamente. ";
+            }
+            catch (GenderDataException sdex)
+            {
+                result.Message = sdex.Message;
+                result.Success = false;
+                this.logger.LogError($"{result.Message}", sdex.ToString());
+
             }
             catch (Exception ex)
             {

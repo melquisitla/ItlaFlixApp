@@ -14,14 +14,41 @@ namespace ItlaFlixApp.DAL.Repositorios
     public class GenderRepositories : Core.RepositoryBase<Gender>, IGenderRepository
     {
 
-        private readonly ItlaContext _itlacontext;
-        private readonly ILogger<GenderRepositories> _logger;
+        private readonly ItlaContext itlacontext;
+        private readonly ILogger<GenderRepositories> logger;
 
         public GenderRepositories(ItlaContext itlacontext, ILogger<GenderRepositories> logger) : base(itlacontext) 
         {
-            _itlacontext = itlacontext;
-            _logger = logger;
+            this.itlacontext = itlacontext;
+            this.logger = logger;
         }
-      
+        public override void Save(Gender entity)
+        {
+            if (string.IsNullOrEmpty(entity.txt_desc))
+            {
+                throw new GenderDataException("El nombre es requerido");
+
+            }
+            base.Save(entity);
+            base.SaveChanges();
+        }
+        public override void Delete(Gender entity) 
+        { 
+           base.Delete(entity);
+           base.SaveChanges();
+        
+        }
+        public override void Update(Gender entity)
+        {
+            base.Update(entity);
+        }
+        public override void SaveChanges()
+        {
+            base.SaveChanges();
+        }
+        public override List<Gender> GetEntities() 
+        { 
+          return base.GetEntities();
+        }
     }
 }

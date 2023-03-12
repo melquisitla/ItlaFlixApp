@@ -2,10 +2,10 @@
 
 namespace ItlaFlixApp.DAL.Exceptions
 {
-    public class GenderException : Exception
+    public class GenderDataException : Exception
     
     {
-        public GenderException(string message) :base(message) { 
+        public GenderDataException(string message) :base(message) { 
         
         } 
     }

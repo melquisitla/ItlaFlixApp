@@ -1,9 +1,9 @@
 ﻿using System;
 namespace ItlaFlixApp.DAL.Exceptions
 {
-    public class MovieException : Exception
+    public class MovieDataException : Exception
     {
-        public MovieException(string message) :base(message) { 
+        public MovieDataException(string message) :base(message) { 
         
         
        }

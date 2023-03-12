@@ -12,6 +12,8 @@ namespace ItlaFlixApp.BL.Dtos.Movie
 
         public bool Removed { get; set; }
 
+        public bool Deleted { get; set; }
+
       
     }
 }
