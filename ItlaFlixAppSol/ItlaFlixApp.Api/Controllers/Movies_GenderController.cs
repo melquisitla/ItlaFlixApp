@@ -16,7 +16,7 @@ namespace ItlaFlixApp.API.Controllers
     [ApiController]
     public class Movies_GenderController : ControllerBase
     {
-        private readonly IMovieGenderService _movieGenderService;
+        private IMovieGenderService _movieGenderService;
 
         public Movies_GenderController(IMovieGenderService movieGenderService)
         {
@@ -53,26 +53,48 @@ namespace ItlaFlixApp.API.Controllers
         }
 
         // POST api/<Movies_GenderController>
-        [HttpPost]
-        public IActionResult Post([FromBody] Movies_Gender gender)
+        [HttpPost("SaveMovieGender")]
+        public IActionResult Post([FromBody] MovieGenderSaveDto movieGenderDto)
         {
-            return Ok();
+            var result = this._movieGenderService.SaveMovieGender(movieGenderDto);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest(result);
+            }
         }
 
         // PUT api/<Movies_GenderController>/5
         [HttpPut("{id}")]
-        public IActionResult Put([FromBody] Movies_Gender gender)
+        public IActionResult Put([FromBody] MovieGenderUpdateDto movieGenderDto)
         {
-            return Ok();
+            var result = this._movieGenderService.UpdateMovieGender(movieGenderDto);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest(result);
+            }
         }
 
         // DELETE api/<Movies_GenderController>/5
         [HttpDelete("{id}")]
-        public IActionResult Delete([FromBody] Movies_Gender gender)
+        public IActionResult Delete([FromBody] MovieGenderRemoveDto movieGenderDto)
         {
-            var movieGender = new MovieGenderRemoveDto() { };
-            _movieGenderService.DeleteMovieGender(movieGender);
-            return Ok();
+            var result = this._movieGenderService.DeleteMovieGender(movieGenderDto);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest(result);
+            }
         }
     }
 }

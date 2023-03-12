@@ -16,14 +16,26 @@ namespace ItlaFlixApp.DAL.Repositorios
         private readonly ItlaContext _itlacontext;
         private readonly ILogger<Movies_GenderRepository> _logger;
 
-        //public Movies_GenderRepository()
-       // {
-        //}
-
         public Movies_GenderRepository(ItlaContext itlacontext, ILogger<Movies_GenderRepository> logger) : base(itlacontext) 
         {
             _itlacontext = itlacontext;
             _logger = logger;
-        } 
+        }
+        public override void Save(Movies_Gender entity)
+        {
+            base.Save(entity);
+            base.SaveChanges();
+        }
+        public override void Remove(Movies_Gender entity)
+        {
+            base.Remove(entity);
+            base.SaveChanges();
+        }
+
+        public override void Update(Movies_Gender entity)
+        {
+            base.Update(entity);
+            base.SaveChanges();
+        }
     }
 }
