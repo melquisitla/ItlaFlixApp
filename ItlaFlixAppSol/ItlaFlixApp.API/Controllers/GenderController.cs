@@ -3,6 +3,9 @@ using ItlaFlixApp.DAL.Interfaces;
 using System.Collections.Generic;
 using ItlaFlixApp.DAL.Models;
 using ItlaFlixApp.DAL.Entities;
+using ItlaFlixApp.BL.Contract;
+using ItlaFlixApp.BL.Dtos.Gender;
+using ItlaFlixApp.BL.Dtos.Movie;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,50 +15,71 @@ namespace ItlaFlixApp.API.Controllers
     [ApiController]
     public class GenderController : ControllerBase
     {
-        private readonly IGenderRepository _genderRepository;
+        
+        private readonly IGenderServices genderServices;
 
-        public GenderController(IGenderRepository genderRepository)
+        public GenderController(IGenderServices genderServices)
         {
-            _genderRepository = genderRepository;
+            this.genderServices = genderServices;
         }
         // GET: api/<GenderController>
         [HttpGet]
         public IActionResult Get()
         {
-           var genders = _genderRepository.GetEntities();
-            return Ok(genders);
+            var result = this.genderServices.GetAll();
+
+            if (result.Success)
+                return Ok(result);
+            else
+                return BadRequest(result);
         }
 
         // GET api/<GenderController>/5
         [HttpGet("cod_genero")]
         public IActionResult Get(int cod_genero)
         {
-            var gender = _genderRepository.GetEntity(cod_genero);
-            return Ok(gender);
+            var result = this.genderServices.GetById(cod_genero);
+
+            if (result.Success)
+                return Ok(result);
+            else
+                return BadRequest(result);
         }
 
         // POST api/<GenderController>
         [HttpPost]
-        public IActionResult Post([FromBody] Gender gender)
+        public IActionResult Post([FromBody] GenderSaveDto genderSaveDto)
         {
-            _genderRepository.Add(gender);
-            return Ok();
+            var result = this.genderServices.SaveGender(genderSaveDto);
+
+            if (result.Success)
+                return Ok(result);
+            else
+                return BadRequest(result);
         }
 
         // PUT api/<GenderController>/5
         [HttpPut("")]
-        public IActionResult Put( [FromBody] Gender gender)
+        public IActionResult Put( [FromBody] GenderUpdateDto genderUpdateDto)
         {
-            _genderRepository.Update(gender);
-            return Ok();
+            var result = this.genderServices.UpdateGender(genderUpdateDto);
+
+            if (result.Success)
+                return Ok(result);
+            else
+                return BadRequest(result);
         }
 
         // DELETE api/<GenderController>/5
         [HttpDelete("")]
-        public IActionResult Delete([FromBody] Gender gender)
+        public IActionResult Delete([FromBody] GenderRemoveDto genderRemoveDto)
         {
-            _genderRepository.Delete(gender);
-            return Ok();
+            var result = this.genderServices.RemoveGender(genderRemoveDto);
+
+            if (result.Success)
+                return Ok(result);
+            else
+                return BadRequest(result);
         }
     }
 }

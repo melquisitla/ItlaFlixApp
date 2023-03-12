@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using ItlaFlixApp.DAL.Models;
 using ItlaFlixApp.DAL.Entities;
+using ItlaFlixApp.BL.Contract;
+using ItlaFlixApp.BL.Dtos.Movie;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,51 +14,71 @@ namespace ItlaFlixApp.API.Controllers
     [ApiController]
     public class MovieController : ControllerBase
     {
-        private readonly IMovieRepository _movieRepository;
+        
+        private readonly IMovieServices movieServices;
 
-        public MovieController(IMovieRepository movieRepository)
+        public MovieController(IMovieServices movieServices)
         {
-            _movieRepository = movieRepository;
+            this.movieServices = movieServices;
         }
         // GET: api/<MovieController>
         [HttpGet]
         public IActionResult Get()
         {
-            var movies = _movieRepository.GetEntities();
-            return Ok(movies);
+            var result = this.movieServices.GetAll();
+
+            if (result.Success)
+                return Ok(result);
+            else
+                return BadRequest(result);         
         }
 
         // GET api/<MovieController>/5
         [HttpGet("cod_pelicula")]
         public IActionResult Get(int cod_pelicula)
         {
-            var movie = _movieRepository.GetEntity(cod_pelicula);
-            return Ok(movie);
+            var result = this.movieServices.GetById(cod_pelicula);
+
+            if (result.Success)
+                return Ok(result);
+            else
+                return BadRequest(result);
         }
 
         // POST api/<MovieController>
         [HttpPost]
-        public IActionResult Post([FromBody] Movie movie)
+        public IActionResult Post([FromBody] MovieSaveDto movieSaveDto)
         {
-            _movieRepository.Add(movie);
-            return Ok();
+            var result = this.movieServices.SaveMovie(movieSaveDto);
+
+            if (result.Success)
+                return Ok(result);
+            else
+                return BadRequest(result);
         }
 
         // PUT api/<MovieController>/5
         [HttpPut("")]
-        public IActionResult Put( [FromBody] Movie movie)
+        public IActionResult Put( [FromBody] MovieUpdateDto movieUpdateDto)
         {
-            _movieRepository.Update(movie);
-            _movieRepository.SaveChanges();
-            return Ok();
+            var result = this.movieServices.UpdateMovie(movieUpdateDto);
+
+            if (result.Success)
+                return Ok(result);
+            else
+                return BadRequest(result);
         }
 
         // DELETE api/<MovieController>/5
         [HttpDelete("")]
-        public IActionResult Delete([FromBody] Movie movie)
+        public IActionResult Delete([FromBody] MovieRemoveDto movieRemoveDto)
         {
-            _movieRepository.Delete(movie);
-            return Ok();
+            var result = this.movieServices.RemoveMovie(movieRemoveDto);
+
+            if (result.Success)
+                return Ok(result);
+            else
+                return BadRequest(result);
         }
     }
     

@@ -1782,6 +1782,19 @@
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "ItlaFlixApp.BL/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
+        "dependencies": {
+          "ItlaFlixApp.DAL": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/ItlaFlixApp.BL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ItlaFlixApp.BL.dll": {}
+        }
+      },
       "ItlaFlixApp.DAL/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.1",
@@ -6079,6 +6092,11 @@
         "system.xml.xmlserializer.nuspec"
       ]
     },
+    "ItlaFlixApp.BL/1.0.0": {
+      "type": "project",
+      "path": "../ItlaFlixApp.BL/ItlaFlixApp.BL.csproj",
+      "msbuildProject": "../ItlaFlixApp.BL/ItlaFlixApp.BL.csproj"
+    },
     "ItlaFlixApp.DAL/1.0.0": {
       "type": "project",
       "path": "../ItlaFlixApp.DAL/ItlaFlixApp.DAL.csproj",
@@ -6087,6 +6105,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "ItlaFlixApp.BL >= 1.0.0",
       "ItlaFlixApp.DAL >= 1.0.0",
       "Swashbuckle.AspNetCore >= 5.6.3"
     ]
@@ -6123,6 +6142,9 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
+            "C:\\Proyects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixAppSol\\ItlaFlixApp.BL\\ItlaFlixApp.BL.csproj": {
+              "projectPath": "C:\\Proyects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixAppSol\\ItlaFlixApp.BL\\ItlaFlixApp.BL.csproj"
+            },
             "C:\\Proyects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixAppSol\\ItlaFlixApp.DAL\\ItlaFlixApp.DAL.csproj": {
               "projectPath": "C:\\Proyects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixAppSol\\ItlaFlixApp.DAL\\ItlaFlixApp.DAL.csproj"
             }

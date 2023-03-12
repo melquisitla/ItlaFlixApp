@@ -72,17 +72,74 @@ namespace ItlaFlixApp.BL.Services
 
         public ServiceResult RemoveGender(GenderRemoveDto removeDto)
         {
-            throw new System.NotImplementedException();
+            ServiceResult result = new ServiceResult();
+
+            try
+            {
+                var genders = this.genderRepository.GetEntities().Select(cd => new GenderResultModel()
+                {
+                    txt_desc = cd.txt_desc,
+                    cod_genero = cd.cod_genero,
+
+                }).ToList();
+                result.Data = genders;
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+                result.Message = "Ocurrio un error removiendo el genero";
+                result.Success = false;
+                this.logger.LogError($" {result.Message} ", ex.ToString());
+            }
+            return result;
         }
 
         public ServiceResult SaveGender(GenderSaveDto saveDto)
         {
-            throw new System.NotImplementedException();
+            ServiceResult result = new ServiceResult();
+
+            try
+            {
+                var genders = this.genderRepository.GetEntities().Select(cd => new GenderResultModel()
+                {
+                    txt_desc = cd.txt_desc,
+                    cod_genero = cd.cod_genero,
+
+                }).ToList();
+                result.Data = genders;
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+                result.Message = "Ocurrio un error guardando el genero";
+                result.Success = false;
+                this.logger.LogError($" {result.Message} ", ex.ToString());
+            }
+            return result;
         }
 
         public ServiceResult UpdateGender(GenderUpdateDto updateDto)
         {
-            throw new System.NotImplementedException();
+            ServiceResult result = new ServiceResult();
+
+            try
+            {
+                var genders = this.genderRepository.GetEntities().Select(cd => new GenderResultModel()
+                {
+                    txt_desc = cd.txt_desc,
+                    cod_genero = cd.cod_genero,
+
+                }).ToList();
+                result.Data = genders;
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+                result.Message = "Ocurrio un error actualizando el genero";
+                result.Success = false;
+                this.logger.LogError($" {result.Message} ", ex.ToString());
+            }
+            return result;
         }
     }
 }

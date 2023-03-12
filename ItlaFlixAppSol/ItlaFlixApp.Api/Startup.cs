@@ -14,6 +14,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using ItlaFlixApp.DAL.Context;
 using Microsoft.EntityFrameworkCore;
+using ItlaFlixApp.BL.Contract;
+using ItlaFlixApp.BL.Services;
 
 namespace ItlaFlixApp.API
 {
@@ -29,10 +31,14 @@ namespace ItlaFlixApp.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Context
             services.AddDbContext<ItlaContext>(options => options.UseSqlServer(this.Configuration.GetConnectionString("ItlaContext")));
-
-           services.AddTransient<IMovieRepository, MovieRepositories>();
-           services.AddTransient<IGenderRepository, GenderRepositories>();
+            //Repositories
+           services.AddScoped<IMovieRepository, MovieRepositories>();
+           services.AddScoped<IGenderRepository, GenderRepositories>();
+            //App services
+            services.AddTransient<IMovieServices, MovieService>();
+            services.AddTransient<IGenderServices, GenderService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

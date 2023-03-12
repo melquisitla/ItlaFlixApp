@@ -80,17 +80,86 @@ namespace ItlaFlixApp.BL.Services
 
         public ServiceResult RemoveMovie(MovieRemoveDto removeDto)
         {
-            throw new System.NotImplementedException();
+            ServiceResult result = new ServiceResult();
+
+            try
+            {
+                var movies = this.movieRepository.GetEntities().Select(cd => new MovieResultModel()
+                {
+                    txt_desc = cd.txt_desc,
+                    precio_venta = cd.precio_venta,
+                    precio_alquiler = cd.precio_alquiler,
+                    cod_Peliculas = cd.cod_pelicula,
+                    cant_disponibles_alquiler = cd.cant_disponibles_alquiler,
+                    cant_disponibles_venta = cd.cant_disponibles_venta
+                }).ToList();
+                result.Data = movies;
+                result.Success = true;
+
+            }
+            catch (Exception ex)
+            {
+                result.Message = "Ocurrio un error removiendo la pelicula";
+                result.Success = false;
+                this.logger.LogError($" {result.Message} ", ex.ToString());
+            }
+            return result;
         }
 
         public ServiceResult SaveMovie(MovieSaveDto saveDto)
         {
-            throw new System.NotImplementedException();
+            ServiceResult result = new ServiceResult();
+
+            try
+            {
+                var movies = this.movieRepository.GetEntities().Select(cd => new MovieResultModel()
+                {
+                    txt_desc = cd.txt_desc,
+                    precio_venta = cd.precio_venta,
+                    precio_alquiler = cd.precio_alquiler,
+                    cod_Peliculas = cd.cod_pelicula,
+                    cant_disponibles_alquiler = cd.cant_disponibles_alquiler,
+                    cant_disponibles_venta = cd.cant_disponibles_venta
+                }).ToList();
+                result.Data = movies;
+                result.Success = true;
+
+            }
+            catch (Exception ex)
+            {
+                result.Message = "Ocurrio un error guardando la pelicula";
+                result.Success = false;
+                this.logger.LogError($" {result.Message} ", ex.ToString());
+            }
+            return result;
         }
 
         public ServiceResult UpdateMovie(MovieUpdateDto updateDto)
         {
-            throw new System.NotImplementedException();
+            ServiceResult result = new ServiceResult();
+
+            try
+            {
+                var movies = this.movieRepository.GetEntities().Select(cd => new MovieResultModel()
+                {
+                    txt_desc = cd.txt_desc,
+                    precio_venta = cd.precio_venta,
+                    precio_alquiler = cd.precio_alquiler,
+                    cod_Peliculas = cd.cod_pelicula,
+                    cant_disponibles_alquiler = cd.cant_disponibles_alquiler,
+                    cant_disponibles_venta = cd.cant_disponibles_venta
+                }).ToList();
+                result.Data = movies;
+                result.Success = true;
+
+            }
+            catch (Exception ex)
+            {
+                result.Message = "Ocurrio un error actualizando la pelicula";
+                result.Success = false;
+                this.logger.LogError($" {result.Message} ", ex.ToString());
+            }
+            return result;
         }
     }
 }
