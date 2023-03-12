@@ -2,8 +2,6 @@
 {
    public class GenderSaveDto
     {
-      
-
-        public string? txt_desc { get; set; }
+       public string? txt_desc { get; set; }
     }
 }

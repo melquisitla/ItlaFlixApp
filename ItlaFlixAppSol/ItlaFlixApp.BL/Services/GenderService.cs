@@ -83,7 +83,7 @@ namespace ItlaFlixApp.BL.Services
 
                 result.Data = genderToRemove;
                 result.Success = true;
-                this.genderRepository.Delete(genderToRemove);
+                this.genderRepository.Update(genderToRemove);
                 this.genderRepository.SaveChanges();
                 result.Success = true;
                 result.Message = "El genero ha sido eliminado correctamente. ";
@@ -138,8 +138,9 @@ namespace ItlaFlixApp.BL.Services
                 Gender gender = this.genderRepository.GetEntity(updateDto.cod_genero);
                 gender.cod_genero = updateDto.cod_genero;
                 gender.txt_desc = updateDto.txt_desc;
-
+                
                 this.genderRepository.Update(gender);
+                this.genderRepository.SaveChanges(); 
                 result.Success = true;
                 result.Message = "El genero ha sido actualizado correctamente. ";
             }

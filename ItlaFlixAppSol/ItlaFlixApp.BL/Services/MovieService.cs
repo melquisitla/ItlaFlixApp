@@ -88,10 +88,11 @@ namespace ItlaFlixApp.BL.Services
             {
                 Movie movieToRemove = this.movieRepository.GetEntity(removeDto.cod_pelicula);
                 movieToRemove.cod_pelicula = removeDto.cod_pelicula;
+
                
                 result.Data = movieToRemove;
                 result.Success = true;
-                this.movieRepository.Delete(movieToRemove);
+                this.movieRepository.Update(movieToRemove);
                 this.movieRepository.SaveChanges();
                 result.Success = true;
                 result.Message = "La pelicula ha sido eliminado correctamente. ";
@@ -158,6 +159,7 @@ namespace ItlaFlixApp.BL.Services
                 movie.precio_alquiler = updateDto.precio_alquiler;
 
                 this.movieRepository.Update(movie);
+                this.movieRepository.SaveChanges();
                 result.Success = true;
                 result.Message = "La pelicula ha sido actualizado correctamente. ";
             }

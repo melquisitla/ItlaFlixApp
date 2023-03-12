@@ -1,15 +1,13 @@
-﻿using ItlaFlixApp.BL.Dtos.Movie;
+﻿using ItlaFlixApp.BL.Core;
+using ItlaFlixApp.BL.Dtos.Movie;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace ItlaFlixApp.BL.Dtos.Gender
 {
-    public class GenderRemoveDto
+    public class GenderRemoveDto : GenderBaseEntity
     {
-        [Key]
-        public int cod_genero { get; set; }
-
-        public bool Removed { get; set; }
+         public bool Removed { get; set; }
     }
 }
