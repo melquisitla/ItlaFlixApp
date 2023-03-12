@@ -35,6 +35,8 @@ namespace ItlaFlixApp.BL.Services
                   cant_disponibles_alquiler = cd.cant_disponibles_alquiler,
                   cant_disponibles_venta = cd.cant_disponibles_venta
                 }).ToList();
+                result.Data = movies;
+                result.Success = true;
 
             }
             catch (Exception ex)
@@ -48,7 +50,32 @@ namespace ItlaFlixApp.BL.Services
 
         public ServiceResult GetById(int id)
         {
-            throw new System.NotImplementedException();
+            ServiceResult result = new ServiceResult();
+
+            try
+            {
+                var movies = this.movieRepository.GetEntity(id);
+                    
+                    MovieResultModel movieResultModel = new MovieResultModel()
+                {
+                    txt_desc = movies.txt_desc,
+                    precio_venta = movies.precio_venta,
+                    precio_alquiler = movies.precio_alquiler,
+                    cod_Peliculas = movies.cod_pelicula,
+                    cant_disponibles_alquiler = movies.cant_disponibles_alquiler,
+                    cant_disponibles_venta = movies.cant_disponibles_venta
+                };
+                result.Data = movies;
+                result.Success = true;
+
+            }
+            catch (Exception ex)
+            {
+                result.Message = "Ocurrio un error obteniendo la pelicula";
+                result.Success = false;
+                this.logger.LogError($" {result.Message} ", ex.ToString());
+            }
+            return result;
         }
 
         public ServiceResult RemoveMovie(MovieRemoveDto removeDto)

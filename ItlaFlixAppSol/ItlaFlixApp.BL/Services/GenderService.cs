@@ -26,12 +26,14 @@ namespace ItlaFlixApp.BL.Services
 
             try
             {
-                var movies = this.genderRepository.GetEntities().Select(cd => new GenderResultModel()
+                var genders = this.genderRepository.GetEntities().Select(cd => new GenderResultModel()
                 {
                     txt_desc = cd.txt_desc,
                     cod_genero= cd.cod_genero,
                    
                 }).ToList();
+                result.Data = genders;
+                result.Success = true;
             }
             catch (Exception ex)
             {
@@ -44,7 +46,28 @@ namespace ItlaFlixApp.BL.Services
 
         public ServiceResult GetById(int id)
         {
-            throw new System.NotImplementedException();
+            ServiceResult result = new ServiceResult();
+
+            try
+            {
+                var genders = this.genderRepository.GetEntity(id);
+
+                GenderResultModel genderResultModel = new GenderResultModel()
+                {
+                    txt_desc = genders.txt_desc,
+                    cod_genero = genders.cod_genero,
+
+                };
+                result.Data = genders;
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+                result.Message = "Ocurrio un error obteniendo el genero";
+                result.Success = false;
+                this.logger.LogError($" {result.Message} ", ex.ToString());
+            }
+            return result;
         }
 
         public ServiceResult RemoveGender(GenderRemoveDto removeDto)
