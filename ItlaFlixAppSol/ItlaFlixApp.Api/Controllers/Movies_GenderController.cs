@@ -5,6 +5,8 @@ using ItlaFlixApp.DAL.Entities;
 using ItlaFlixApp.DAL.Model;
 using System.Reflection;
 using System.Linq;
+using ItlaFlixApp.BL.Contract;
+using ItlaFlixApp.BL.Dtos.MovieGender;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -14,33 +16,46 @@ namespace ItlaFlixApp.API.Controllers
     [ApiController]
     public class Movies_GenderController : ControllerBase
     {
-        private readonly IMovies_GenderRepository _movies_genderRepository;
+        private readonly IMovieGenderService _movieGenderService;
 
-        public Movies_GenderController(IMovies_GenderRepository moviegenderRepository)
+        public Movies_GenderController(IMovieGenderService movieGenderService)
         {
-            _movies_genderRepository = moviegenderRepository;
+            _movieGenderService = movieGenderService;
         }
         // GET: api/<Movies_GenderController>
         [HttpGet]
         public IActionResult Get()
         {
-            var movieGender = _movies_genderRepository.GetEntities();
-            return Ok(movieGender);
+            var result = this._movieGenderService.GetAll();
+            if(result.Success)
+            {
+            return Ok(result);
+            }
+            else
+            {
+                return BadRequest(result);
+            }
         }
 
         // GET api/<Movies_GenderController>/5
         [HttpGet("{id}")]
         public IActionResult Get(int cod_genero)
         {
-            var movie = _movies_genderRepository.GetEntity(cod_genero);
-            return Ok(movie);
+            var result = this._movieGenderService.GetById(cod_genero);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest(result);
+            }
         }
 
         // POST api/<Movies_GenderController>
         [HttpPost]
         public IActionResult Post([FromBody] Movies_Gender gender)
         {
-            _movies_genderRepository.Save(gender);
             return Ok();
         }
 
@@ -48,7 +63,6 @@ namespace ItlaFlixApp.API.Controllers
         [HttpPut("{id}")]
         public IActionResult Put([FromBody] Movies_Gender gender)
         {
-            _movies_genderRepository.Update(gender);
             return Ok();
         }
 
@@ -56,7 +70,8 @@ namespace ItlaFlixApp.API.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete([FromBody] Movies_Gender gender)
         {
-            _movies_genderRepository.Remove(gender);
+            var movieGender = new MovieGenderRemoveDto() { };
+            _movieGenderService.DeleteMovieGender(movieGender);
             return Ok();
         }
     }

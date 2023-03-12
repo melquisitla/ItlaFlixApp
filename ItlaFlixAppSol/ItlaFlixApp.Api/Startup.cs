@@ -1,3 +1,5 @@
+using ItlaFlixApp.BL.Contract;
+using ItlaFlixApp.BL.Services;
 using ItlaFlixApp.DAL.Context;
 using ItlaFlixApp.DAL.Entities;
 using ItlaFlixApp.DAL.Interfaces;
@@ -35,7 +37,10 @@ namespace ItlaFlixApp.API
             services.AddDbContext<ItlaContext>(options => options.UseSqlServer(this.Configuration.GetConnectionString("ItlaContext")));
 
             //Repositories
-            services.AddTransient<IMovies_GenderRepository, Movies_GenderRepository>();
+            services.AddScoped<IMovies_GenderRepository, Movies_GenderRepository>();
+
+            // App Services
+            services.AddTransient<IMovieGenderService, MovieGenderService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

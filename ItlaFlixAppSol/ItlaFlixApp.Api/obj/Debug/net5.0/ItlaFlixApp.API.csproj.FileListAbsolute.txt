@@ -59,3 +59,5 @@ C:\projects\ItlaFlixApp\ItlaFlixAppSol\ItlaFlixApp.API\obj\Debug\net5.0\refint\I
 C:\projects\ItlaFlixApp\ItlaFlixAppSol\ItlaFlixApp.API\obj\Debug\net5.0\ItlaFlixApp.API.pdb
 C:\projects\ItlaFlixApp\ItlaFlixAppSol\ItlaFlixApp.API\obj\Debug\net5.0\ItlaFlixApp.API.genruntimeconfig.cache
 C:\projects\ItlaFlixApp\ItlaFlixAppSol\ItlaFlixApp.API\obj\Debug\net5.0\ref\ItlaFlixApp.API.dll
+C:\projects\ItlaFlixApp\ItlaFlixAppSol\ItlaFlixApp.API\bin\Debug\net5.0\ItlaFlixApp.BL.dll
+C:\projects\ItlaFlixApp\ItlaFlixAppSol\ItlaFlixApp.API\bin\Debug\net5.0\ItlaFlixApp.BL.pdb

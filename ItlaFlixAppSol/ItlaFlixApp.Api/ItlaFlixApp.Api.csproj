@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ItlaFlixApp.BL\ItlaFlixApp.BL.csproj" />
     <ProjectReference Include="..\ItlaFlixApp.DAL\ItlaFlixApp.DAL.csproj" />
   </ItemGroup>
 

@@ -24,6 +24,6 @@ namespace ItlaFlixApp.DAL.Repositorios
         {
             _itlacontext = itlacontext;
             _logger = logger;
-        }
+        } 
     }
 }
