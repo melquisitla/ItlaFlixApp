@@ -124,7 +124,7 @@ namespace ItlaFlixApp.BL.Services
                 this.movieRepository.Save(movie);
                 this.movieRepository.SaveChanges();
                 result.Success = true;
-                result.Message = "La pelicula ha sido agregado correctamente. ";
+                result.Message = "La pelicula ha sido agregada correctamente. ";
             
             }
             catch (MovieDataException sdex)
@@ -150,6 +150,7 @@ namespace ItlaFlixApp.BL.Services
             try
             {
                 Movie movie = this.movieRepository.GetEntity(updateDto.cod_pelicula);
+                movie.cod_pelicula = updateDto.cod_pelicula;
                 movie.txt_desc = updateDto.txt_desc;
                 movie.cant_disponibles_venta = updateDto.cant_disponibles_venta;
                 movie.cant_disponibles_alquiler = updateDto.cant_disponibles_alquiler;

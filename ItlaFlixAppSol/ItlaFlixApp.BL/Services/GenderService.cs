@@ -136,6 +136,7 @@ namespace ItlaFlixApp.BL.Services
             try
             {
                 Gender gender = this.genderRepository.GetEntity(updateDto.cod_genero);
+                gender.cod_genero = updateDto.cod_genero;
                 gender.txt_desc = updateDto.txt_desc;
 
                 this.genderRepository.Update(gender);
