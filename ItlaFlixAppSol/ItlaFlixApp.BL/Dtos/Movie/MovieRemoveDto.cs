@@ -10,10 +10,7 @@ namespace ItlaFlixApp.BL.Dtos.Movie
         [Key]
         public int cod_pelicula { get; set; }
 
-        public bool Removed { get; set; }
-
-        public bool Deleted { get; set; }
-
+      
       
     }
 }

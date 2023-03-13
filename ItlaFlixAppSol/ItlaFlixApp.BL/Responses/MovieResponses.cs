@@ -7,6 +7,6 @@ namespace ItlaFlixApp.BL.Responses
 {
     public class MovieResponses : ServiceResult
     {
-        public int MovieId { get; set; }
+       
     }
 }
