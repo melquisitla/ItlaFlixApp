@@ -1,8 +1,6 @@
-﻿using ItlaFlixApp.DAL.Entities;
-using ItlaFlixApp.DAL.Interfaces;
-using ItlaFlixApp.DAL.Models;
+﻿using ItlaFlixApp.BL.Contract;
+using ItlaFlixApp.BL.Dtos.Sale;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,50 +10,70 @@ namespace ItlaFlixApp.API.Controllers
     [ApiController]
     public class SaleController : ControllerBase
     {
-        private readonly ISaleRepository _saleRepository;
+        private readonly ISaleService saleService;
 
-        public SaleController(ISaleRepository saleRepository)
+        public SaleController(ISaleService saleService)
         {
-            _saleRepository = saleRepository;
+            this.saleService = saleService;
         }
         // GET: api/<SaleController>
         [HttpGet]
         public IActionResult Get()
         {
-            var sales = _saleRepository.GetEntities();
-            return Ok(sales);
+            var result = this.saleService.GetAll();
+
+            if (result.Success)
+                return Ok(result);
+            else
+                return BadRequest(result);
         }
 
         // GET api/<SaleController>/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var sale = _saleRepository.GetEntity(id);
-            return Ok(sale);
+            var result = this.saleService.GetById(id);
+
+            if (result.Success)
+                return Ok(result);
+            else
+                return BadRequest(result);
         }
 
         // POST api/<SaleController>
         [HttpPost("SaveSale")]
-        public IActionResult Post([FromBody] Sale sale)
+        public IActionResult Post([FromBody] SaleSaveDto saleSaveDto)
         {
-            _saleRepository.Save(sale);
-            return Ok();
+            var result = this.saleService.SaveSale(saleSaveDto);
+
+            if (result.Success)
+                return Ok(result);
+            else
+                return BadRequest(result);
         }
 
         // PUT api/<SaleController>/5
         [HttpPut("UpdateSale")]
-        public IActionResult Put([FromBody] Sale sale)
+        public IActionResult Put([FromBody] SaleUpdateDto saleUpdateDto)
         {
-            _saleRepository.Update(sale);
-            return Ok();
+            var result = this.saleService.UpdateSale(saleUpdateDto);
+
+            if (result.Success)
+                return Ok(result);
+            else
+                return BadRequest(result);
         }
 
         // DELETE api/<SaleController>/5
         [HttpDelete("RemoveSale")]
-        public IActionResult Remove([FromBody] Sale sale)
+        public IActionResult Remove([FromBody] SaleRemoveDto saleRemoveDto)
         {
-            _saleRepository.Remove(sale);
-            return Ok();
+            var result = this.saleService.RemoveSale(saleRemoveDto);
+
+            if (result.Success)
+                return Ok(result);
+            else
+                return BadRequest(result);
         }
     }
 }

@@ -9,19 +9,37 @@ namespace ItlaFlixApp.DAL.Repositorios
 {
     public class UserRepositories : Core.RepositoryBase<User>, IUserRepository
     {
-        private readonly ItlaContext _ItlaContext;
-        private readonly ILogger<UserRepositories> _logger;
+        private readonly ItlaContext ItlaContext;
+        private readonly ILogger<UserRepositories> logger;
         
         public UserRepositories(ItlaContext ItlaContext, ILogger<UserRepositories> logger): base(ItlaContext)
         {
-            _ItlaContext = ItlaContext;
-            _logger = logger;
+            this.ItlaContext = ItlaContext;
+            this.logger = logger;
         }
         //Para cambiar el comportamiento de una debemios hacer override aqui con loss cambios que necesitemos
-/*        public override List<User> GetEntities()
+        /*        public override List<User> GetEntities()
+                {
+                    var users= this._ItlaContext.tUsers.Where(usr => usr.sn_activo == -1).ToList();
+                    return users;
+                }*/
+        public override void Save(User entity)
         {
-            var users= this._ItlaContext.tUsers.Where(usr => usr.sn_activo == -1).ToList();
-            return users;
-        }*/
+            // x logica para verificar //
+            base.Save(entity);
+            base.SaveChanges();
+        }
+
+        public override void Update(User entity)
+        {
+            base.Update(entity);
+            base.SaveChanges();
+        }
+
+        public override void Remove(User entity)
+        {
+            base.Remove(entity);
+            base.SaveChanges();
+        }
     }
 }

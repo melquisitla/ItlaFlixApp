@@ -1,3 +1,5 @@
+using ItlaFlixApp.BL.Contract;
+using ItlaFlixApp.BL.Services;
 using ItlaFlixApp.DAL.Context;
 using ItlaFlixApp.DAL.Interfaces;
 using ItlaFlixApp.DAL.Repositorios;
@@ -24,9 +26,25 @@ namespace ItlaFlixApp.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Context
             services.AddDbContext<ItlaContext>(options => options.UseSqlServer(this.Configuration.GetConnectionString("ItlaContext")));
-            services.AddTransient<ISaleRepository, SaleRepositories>();
-            services.AddTransient<IUserRepository, UserRepositories>();
+            
+            //Repositories
+            //services.AddTransient<ISaleRepository, SaleRepositories>();//Antes
+            //services.AddTransient<IUserRepository, UserRepositories>();//Antes
+            services.AddScoped<ISaleRepository, SaleRepositories>();
+            services.AddScoped<IUserRepository, UserRepositories>();
+
+
+            //App Services
+            services.AddTransient<ISaleService, SaleService>();
+            services.AddTransient<IUserService, UserService>();
+
+
+
+
+
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
