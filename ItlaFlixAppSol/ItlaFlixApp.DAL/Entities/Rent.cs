@@ -3,19 +3,20 @@ using System;
 
 namespace ItlaFlixApp.DAL.Entities
 {
-    public class Rent : Movies
+    public class Rent
     {
-        public Rent() {
-            this.Fecha = DateTime.Now;
-            this.Devuelta = false;
-            this.precio = this.precio_rent;
+        public Rent()
+        {
+            this.fecha = DateTime.Now;
+            this.devuelta = false;
         }
-        public int cod_rent { get; set; }      
-        //public int cod_usuario { get; set; }
-        public float precio { get; set; }
-        public DateTime Fecha { get; set; }
-        public bool Devuelta { get; set; }
-        public DateTime Date_Devuelta { get; set; }
-        public int cod_usuario_devolucion { get; set; }
+        public int Id { get; set; }
+        public int cod_pelicula { get; set; }
+        public int cod_usuario { get; set; }
+        public decimal precio { get; set; }
+        public DateTime fecha { get; set; }
+        public bool devuelta { get; set; }
+        //public DateTime? Date_Devuelta { get; set; }
+        public int? cod_usuario_devolucion { get; set; }
     }
 }

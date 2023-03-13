@@ -8,23 +8,23 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\mmate\\.nuget\\packages\\": {},
+    "C:\\Users\\Aidil Castillo\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\projects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixApp.WEB\\ItlaFlixApp.WEB.csproj",
+      "projectUniqueName": "C:\\Projects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixApp.WEB\\ItlaFlixApp.WEB.csproj",
       "projectName": "ItlaFlixApp.WEB",
-      "projectPath": "C:\\projects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixApp.WEB\\ItlaFlixApp.WEB.csproj",
-      "packagesPath": "C:\\Users\\mmate\\.nuget\\packages\\",
-      "outputPath": "C:\\projects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixApp.WEB\\obj\\",
+      "projectPath": "C:\\Projects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixApp.WEB\\ItlaFlixApp.WEB.csproj",
+      "packagesPath": "C:\\Users\\Aidil Castillo\\.nuget\\packages\\",
+      "outputPath": "C:\\Projects\\ItlaFlixApp\\ItlaFlixAppSol\\ItlaFlixApp.WEB\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\mmate\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Aidil Castillo\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -33,7 +33,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

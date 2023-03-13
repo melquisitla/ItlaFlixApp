@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ItlaFlixApp.SL", "ItlaFlixA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ItlaFlixApp.WEB", "ItlaFlixApp.WEB\ItlaFlixApp.WEB.csproj", "{13B67AE2-1003-4CAC-A044-F34EE5FA439F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ItlaFlixApp.Api", "ItlaFlixApp.Api\ItlaFlixApp.Api.csproj", "{0A1969C1-BB67-42C4-8C1E-CB9D20481248}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ItlaFlixApp.Api", "ItlaFlixApp.Api\ItlaFlixApp.Api.csproj", "{EF873A27-2392-483C-B38E-A0B85CB40BA9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{13B67AE2-1003-4CAC-A044-F34EE5FA439F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13B67AE2-1003-4CAC-A044-F34EE5FA439F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13B67AE2-1003-4CAC-A044-F34EE5FA439F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0A1969C1-BB67-42C4-8C1E-CB9D20481248}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0A1969C1-BB67-42C4-8C1E-CB9D20481248}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0A1969C1-BB67-42C4-8C1E-CB9D20481248}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0A1969C1-BB67-42C4-8C1E-CB9D20481248}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF873A27-2392-483C-B38E-A0B85CB40BA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF873A27-2392-483C-B38E-A0B85CB40BA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF873A27-2392-483C-B38E-A0B85CB40BA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF873A27-2392-483C-B38E-A0B85CB40BA9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

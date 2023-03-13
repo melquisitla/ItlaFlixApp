@@ -10,34 +10,36 @@ using System.Linq;
 
 namespace ItlaFlixApp.DAL.Repositorios
 {
-    public class UserRepositories : IUserRepository
+    public class UserRepositories : Core.ReposirotyBase<User>, IUserRepository
     {
-        private readonly ItlaContext context;
-        private readonly ILogger<UserRepositories> logger;
+        private readonly ItlaContext _Itlacontext;
+        private readonly ILogger<UserRepositories> _logger;
 
-        public UserRepositories(ItlaContext context, ILogger<UserRepositories> logger) 
+        public UserRepositories(ItlaContext Itlacontext, ILogger<UserRepositories> logger) : base(Itlacontext)
         {
-            this.context = context;
-            this.logger = logger;
+            this._Itlacontext = Itlacontext;
+            this._logger = logger;
         }
         public void Add(User user)
         {
             try
             {
 
-                if(this.context.Users.Any(cd => cd.cod_usuario == user.cod_usuario))
+                //if (NewMethod(user))
                     throw new UserException("El Usuario ya se encuentra regitrado");
 
-                this.context.Users.Add(user);
-                this.context.SaveChanges();
+               // object value = this._Itlacontext.Users.Add(user);
+               // this._Itlacontext.SaveChanges();
             }
             catch (Exception ex)
             {
 
-                this.logger.LogError($"Ocurrio un error {ex.Message}", ex.ToString());
+                this._logger.LogError($"Ocurrio un error {ex.Message}", ex.ToString());
             }
 
         }
+
+       // private bool NewMethod(User user) => this._Itlacontext.Users.Any(cd => cd.cod_usuario == user.cod_usuario);
 
         public void Delete(User user)
         {

@@ -5,4 +5,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ItlaFlixApp.DAL\ItlaFlixApp.DAL.csproj" />
+  </ItemGroup>
+
 </Project>

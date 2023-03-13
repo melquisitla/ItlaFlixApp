@@ -1,0 +1,10 @@
+C:\Projects\ItlaFlixApp\ItlaFlixAppSol\ItlaFlixApp.SL\bin\Debug\netstandard2.1\ItlaFlixApp.SL.deps.json
+C:\Projects\ItlaFlixApp\ItlaFlixAppSol\ItlaFlixApp.SL\bin\Debug\netstandard2.1\ItlaFlixApp.SL.dll
+C:\Projects\ItlaFlixApp\ItlaFlixAppSol\ItlaFlixApp.SL\bin\Debug\netstandard2.1\ItlaFlixApp.SL.pdb
+C:\Projects\ItlaFlixApp\ItlaFlixAppSol\ItlaFlixApp.SL\obj\Debug\netstandard2.1\ItlaFlixApp.SL.csproj.AssemblyReference.cache
+C:\Projects\ItlaFlixApp\ItlaFlixAppSol\ItlaFlixApp.SL\obj\Debug\netstandard2.1\ItlaFlixApp.SL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\ItlaFlixApp\ItlaFlixAppSol\ItlaFlixApp.SL\obj\Debug\netstandard2.1\ItlaFlixApp.SL.AssemblyInfoInputs.cache
+C:\Projects\ItlaFlixApp\ItlaFlixAppSol\ItlaFlixApp.SL\obj\Debug\netstandard2.1\ItlaFlixApp.SL.AssemblyInfo.cs
+C:\Projects\ItlaFlixApp\ItlaFlixAppSol\ItlaFlixApp.SL\obj\Debug\netstandard2.1\ItlaFlixApp.SL.csproj.CoreCompileInputs.cache
+C:\Projects\ItlaFlixApp\ItlaFlixAppSol\ItlaFlixApp.SL\obj\Debug\netstandard2.1\ItlaFlixApp.SL.dll
+C:\Projects\ItlaFlixApp\ItlaFlixAppSol\ItlaFlixApp.SL\obj\Debug\netstandard2.1\ItlaFlixApp.SL.pdb
