@@ -1,0 +1,77 @@
+﻿@model IEnumerable<ItlaFlixApp.WEB.Models.UserModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.cod_usuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.txt_nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.txt_apellido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.txt_user)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nro_doc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cod_rol)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.sn_activo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.cod_usuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.txt_nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.txt_apellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.txt_user)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nro_doc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cod_rol)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sn_activo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.cod_usuario }) |
+                @Html.ActionLink("Details", "Details", new { id=item.cod_usuario }) |
+                @Html.ActionLink("Delete", "Delete", new {  id=item.cod_usuario })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

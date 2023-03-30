@@ -1,0 +1,66 @@
+﻿@model ItlaFlixApp.WEB.Models.UserModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>User Details: @Model.txt_nombre</h1>
+
+<div>
+    <h4>UserModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.cod_usuario)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.cod_usuario)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.txt_nombre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.txt_nombre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.txt_apellido)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.txt_apellido)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.txt_user)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.txt_user)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.nro_doc)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.nro_doc)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.cod_rol)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.cod_rol)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.sn_activo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.sn_activo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.cod_usuario }) |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -119,7 +119,15 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "GSF.Core": {
+              "target": "Package",
+              "version": "[2.4.28, )"
+            },
             "Microsoft.VisualStudio.Web.CodeGeneration.Contracts": {
+              "target": "Package",
+              "version": "[5.0.2, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[5.0.2, )"
             }

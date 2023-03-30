@@ -155,7 +155,10 @@ namespace ItlaFlixApp.BL.Services
                 user.cod_rol = updateDto.cod_rol;
                 user.sn_activo = updateDto.sn_activo;
 
+                
                 this.userRepository.Update(user);
+                this.userRepository.SaveChanges();
+
                 result.Success = true;
                 result.Message = "El usuario ha sido actualizado correctamente";
             }
