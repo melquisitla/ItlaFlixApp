@@ -104,9 +104,11 @@ namespace ItlaFlixApp.WEB.Controllers
             {
                 using (var httpClient = new HttpClient(this.handler))
                 {
-                    StringContent request = new StringContent(JsonConvert.SerializeObject(createRequest), Encoding.UTF8, "aplication/json");
+                    createRequest.fecha = DateTime.Now;
 
-                    var response = await httpClient.PostAsync($"{this.urlBase}/User/SaveSale", request);
+                    StringContent request = new StringContent(JsonConvert.SerializeObject(createRequest), Encoding.UTF8, "application/json");
+
+                    var response = await httpClient.PostAsync($"{this.urlBase}/Sale/SaveSale", request);
 
                     string apiResult = await response.Content.ReadAsStringAsync();
 
