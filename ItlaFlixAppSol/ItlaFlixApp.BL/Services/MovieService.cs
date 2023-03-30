@@ -33,7 +33,7 @@ namespace ItlaFlixApp.BL.Services
                   txt_desc = cd.txt_desc,
                   precio_venta = cd.precio_venta,
                   precio_alquiler = cd.precio_alquiler,
-                  cod_Peliculas = cd.cod_pelicula,
+                  cod_pelicula = cd.cod_pelicula,
                   cant_disponibles_alquiler = cd.cant_disponibles_alquiler,
                   cant_disponibles_venta = cd.cant_disponibles_venta
                 }).ToList();
@@ -63,13 +63,13 @@ namespace ItlaFlixApp.BL.Services
                     txt_desc = movies.txt_desc,
                     precio_venta = movies.precio_venta,
                     precio_alquiler = movies.precio_alquiler,
-                    cod_Peliculas = movies.cod_pelicula,
+                    //cod_pelicula = movies.cod_pelicula,
                     cant_disponibles_alquiler = movies.cant_disponibles_alquiler,
                     cant_disponibles_venta = movies.cant_disponibles_venta
                 };
                 result.Data = movies;
                 result.Success = true;
-
+                result.Message = "se ha obtenido la pelicula correctamente";
             }
             catch (Exception ex)
             {

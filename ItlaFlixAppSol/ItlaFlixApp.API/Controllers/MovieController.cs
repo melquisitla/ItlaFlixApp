@@ -34,7 +34,7 @@ namespace ItlaFlixApp.API.Controllers
         }
 
         // GET api/<MovieController>/5
-        [HttpGet("cod_pelicula")]
+        [HttpGet("{cod_pelicula}")]
         public IActionResult Get(int cod_pelicula)
         {
             var result = this.movieServices.GetById(cod_pelicula);
@@ -46,7 +46,7 @@ namespace ItlaFlixApp.API.Controllers
         }
 
         // POST api/<MovieController>
-        [HttpPost]
+        [HttpPost("SaveMovie")]
         public IActionResult Post([FromBody] MovieSaveDto movieSaveDto)
         {
             var result = this.movieServices.SaveMovie(movieSaveDto);
@@ -58,7 +58,7 @@ namespace ItlaFlixApp.API.Controllers
         }
 
         // PUT api/<MovieController>/5
-        [HttpPut("")]
+        [HttpPut("UpdateMovie")]
         public IActionResult Put( [FromBody] MovieUpdateDto movieUpdateDto)
         {
             var result = this.movieServices.UpdateMovie(movieUpdateDto);

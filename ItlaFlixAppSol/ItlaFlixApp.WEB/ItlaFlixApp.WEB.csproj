@@ -8,4 +8,9 @@
     <ProjectReference Include="..\ItlaFlixApp.DAL\ItlaFlixApp.DAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="GSF.Core" Version="2.4.28" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+  </ItemGroup>
+
 </Project>

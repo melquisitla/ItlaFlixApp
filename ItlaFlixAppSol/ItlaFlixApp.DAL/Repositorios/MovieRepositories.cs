@@ -4,6 +4,8 @@ using ItlaFlixApp.DAL.Interfaces;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using ItlaFlixApp.DAL.Exceptions;
+using System.Linq;
+
 namespace ItlaFlixApp.DAL.Repositorios
 {
     public class MovieRepositories : Core.RepositoryBase<Movie>,IMovieRepository
@@ -47,9 +49,12 @@ namespace ItlaFlixApp.DAL.Repositorios
         }
         public override List<Movie> GetEntities() 
         {
-            return base.GetEntities();
+            return this.itlacontext.tPeliculas.ToList();
         }
-
+        public override Movie GetEntity(int id)
+        {
+            return this.itlacontext.tPeliculas.FirstOrDefault(cd => cd.cod_pelicula == id);
+        }
     }
 }
 

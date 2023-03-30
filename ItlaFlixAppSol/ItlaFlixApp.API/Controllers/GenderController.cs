@@ -15,7 +15,7 @@ namespace ItlaFlixApp.API.Controllers
     [ApiController]
     public class GenderController : ControllerBase
     {
-        
+
         private readonly IGenderServices genderServices;
 
         public GenderController(IGenderServices genderServices)
@@ -35,7 +35,7 @@ namespace ItlaFlixApp.API.Controllers
         }
 
         // GET api/<GenderController>/5
-        [HttpGet("cod_genero")]
+        [HttpGet("{cod_genero}")]
         public IActionResult Get(int cod_genero)
         {
             var result = this.genderServices.GetById(cod_genero);
@@ -47,7 +47,7 @@ namespace ItlaFlixApp.API.Controllers
         }
 
         // POST api/<GenderController>
-        [HttpPost]
+        [HttpPost("SaveGender")]
         public IActionResult Post([FromBody] GenderSaveDto genderSaveDto)
         {
             var result = this.genderServices.SaveGender(genderSaveDto);
@@ -59,7 +59,7 @@ namespace ItlaFlixApp.API.Controllers
         }
 
         // PUT api/<GenderController>/5
-        [HttpPut("")]
+        [HttpPut("UpdateGender")]
         public IActionResult Put( [FromBody] GenderUpdateDto genderUpdateDto)
         {
             var result = this.genderServices.UpdateGender(genderUpdateDto);

@@ -1,21 +1,18 @@
 ﻿using ItlaFlixApp.DAL.Core;
+using System.ComponentModel.DataAnnotations;
 
 namespace ItlaFlixApp.WEB.Models
 {
-    public class MovieModel : BaseEntity
+    public class MovieModel 
 
     {
-        public int id { get; set; }
-        public string Pelicula { get; set; }
-        public string Description { get; set; }
-        public string Gender { get; set; }
-        public int cant_disponible_sale { get; set; }
-        public int cant_disponible_rent { get; set; }
-        public float precio_sale { get; set; }
-        public float precio_rent { get; set; }
-
-        public MovieModel() {
-        
-        }
+        [Key]
+        public int cod_pelicula { get; set; }
+        public string txt_desc { get; set; }
+       
+        public int cant_disponibles_venta { get; set; }
+        public int cant_disponibles_alquiler { get; set; }
+        public decimal precio_venta { get; set; }
+        public decimal? precio_alquiler { get; set; }
     }
 }

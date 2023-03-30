@@ -6,7 +6,7 @@ namespace ItlaFlixApp.BL.Models
     public class MovieResultModel
     {
         [Key]
-        public int cod_Peliculas {get;  set;}
+        public int cod_pelicula {get;  set;}
         public string txt_desc { get; set; }
 
         public int cant_disponibles_alquiler { get; set; }

@@ -1,14 +1,15 @@
 ﻿using ItlaFlixApp.DAL.Core;
+using System.ComponentModel.DataAnnotations;
 
 namespace ItlaFlixApp.WEB.Models
 {
-    public class GenderModel 
+    public class GenderModel
     {
-        public int Id { get; set; }
-        public string Description { get; set; }
 
-        public GenderModel() {
-        }
+        [Key]
+        public int cod_genero { get; set; }
+        public string txt_desc { get; set; }
+
     }
 
 }

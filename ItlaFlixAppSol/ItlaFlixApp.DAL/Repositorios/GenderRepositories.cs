@@ -48,7 +48,12 @@ namespace ItlaFlixApp.DAL.Repositorios
         }
         public override List<Gender> GetEntities() 
         { 
-          return base.GetEntities();
+          return this.itlacontext.tGeneros.ToList();
+        }
+
+        public override Gender GetEntity(int id)
+        {
+            return this.itlacontext.tGeneros.FirstOrDefault(cd => cd.cod_genero == id);
         }
     }
 }

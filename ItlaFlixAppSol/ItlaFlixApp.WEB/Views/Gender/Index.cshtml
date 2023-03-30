@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ItlaFlixApp.WEB.Models.GenderModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.cod_genero)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.txt_desc)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.cod_genero)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.txt_desc)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.cod_genero }) |
+                @Html.ActionLink("Details", "Details", new { id=item.cod_genero}) |
+                @Html.ActionLink("Delete", "Delete", new {  id=item.cod_genero })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

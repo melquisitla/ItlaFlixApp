@@ -7,7 +7,7 @@ namespace ItlaFlixApp.DAL.Core
     {
         [Key]
         public int cod_pelicula { get; set; }
-        public int cod_usuario { get; set; }
+       
         public int cod_genero { get; set; }
     }
 }

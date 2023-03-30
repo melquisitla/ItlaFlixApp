@@ -11,9 +11,13 @@ namespace ItlaFlixApp.DAL.Context
         public ItlaContext(DbContextOptions<ItlaContext> options) : base(options) 
         { 
          
-        }    
+        }
+
+        #region "Registros"
         public DbSet<Movie> tPeliculas { get; set; }
 
-        public DbSet<Gender> tGeneros { get; set; }  
+        public DbSet<Gender> tGeneros { get; set; }
+
+        #endregion
     }
 }

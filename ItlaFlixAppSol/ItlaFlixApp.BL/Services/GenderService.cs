@@ -62,6 +62,7 @@ namespace ItlaFlixApp.BL.Services
                 };
                 result.Data = genders;
                 result.Success = true;
+                result.Message = "se obtuvo el genero correctamente";
             }
             catch (Exception ex)
             {
