@@ -63,7 +63,7 @@ namespace ItlaFlixApp.BL.Services
                     txt_desc = movies.txt_desc,
                     precio_venta = movies.precio_venta,
                     precio_alquiler = movies.precio_alquiler,
-                    //cod_pelicula = movies.cod_pelicula,
+                    cod_pelicula = movies.cod_pelicula,
                     cant_disponibles_alquiler = movies.cant_disponibles_alquiler,
                     cant_disponibles_venta = movies.cant_disponibles_venta
                 };
