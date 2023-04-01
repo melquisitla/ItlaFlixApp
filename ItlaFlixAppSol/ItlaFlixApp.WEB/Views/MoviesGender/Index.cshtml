@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ItlaFlixApp.WEB.Models.MoviesGenderModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Peliculas y Genero</h1>
+
+<p>
+    <a asp-action="Create">Crea  una nueva</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Cod_genero)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cod_pelicula)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cod_genero)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cod_pelicula)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {  id=item.Cod_genero }) |
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
