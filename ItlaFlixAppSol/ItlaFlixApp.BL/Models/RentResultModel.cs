@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using ItlaFlixApp.BL.Dtos.Rent;
 
 namespace ItlaFlixApp.BL.Models
 {

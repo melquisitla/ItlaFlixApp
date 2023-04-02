@@ -14,7 +14,7 @@ namespace ItlaFlixApp.BL.Services
     public class RentService : IRentService
     {
         private readonly IRentRepository rentRepository;
-        private readonly ILogger logger;
+        private readonly ILogger<RentService> logger;
         public RentService(IRentRepository rentRepository,
                            ILogger <RentService> logger)
         { 
@@ -45,13 +45,7 @@ namespace ItlaFlixApp.BL.Services
                 this.logger.LogError($" {result.Message}", ex.ToString());
             }
             return result;
-            //throw new System.NotImplementedException();
         }
-
-       // public ServiceResult GetBy()
-        //{
-           // throw new System.NotImplementedException();
-       // }
 
         public ServiceResult GetById(int id)
         {
@@ -70,6 +64,7 @@ namespace ItlaFlixApp.BL.Services
                 };
                 result.Data = rentResultModel;
                 result.Success = true;
+                result.Message = "Se ha alquilado la pelicula correctamente";
             }
             catch (System.Exception ex) 
             {
