@@ -1,3 +1,5 @@
+using ItlaFlixApp.WEB.ApiServices.Interfaces;
+using ItlaFlixApp.WEB.ApiServices.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -22,6 +24,14 @@ namespace ItlaFlixApp.WEB
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Register http client
+            services.AddHttpClient();
+
+            // Register api services
+            services.AddTransient<IMovieApiServices, MovieApiServices>();
+            services.AddTransient<IGenderApiServices, GenderApiServices>();
+
+
             services.AddControllersWithViews();
         }
 

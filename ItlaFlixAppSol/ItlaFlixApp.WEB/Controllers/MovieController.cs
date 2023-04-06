@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using ItlaFlixApp.WEB.Models.Requests;
 using System.Text;
 using GSF.Console;
+using ItlaFlixApp.WEB.ApiServices.Interfaces;
 
 namespace ItlaFlixApp.WEB.Controllers
 {
@@ -19,14 +20,16 @@ namespace ItlaFlixApp.WEB.Controllers
     {
         HttpClientHandler handler = new HttpClientHandler();
         private readonly IConfiguration configuration;
+        private readonly IMovieApiServices movieApiServices;
         private readonly string urlBase;
 
         public ILogger<MovieController> Logger { get; }
 
-        public MovieController(ILogger<MovieController> logger, IConfiguration configuration)
+        public MovieController(ILogger<MovieController> logger, IConfiguration configuration, IMovieApiServices movieApiServices)
         {
             Logger = logger;
             this.configuration = configuration;
+            this.movieApiServices = movieApiServices;
             this.urlBase = this.configuration["apiConfig:baseURL"];
         }
 
@@ -36,21 +39,9 @@ namespace ItlaFlixApp.WEB.Controllers
 
             try
             {
-                using (var httpClient = new HttpClient(this.handler)) 
-                {
-                    var response = await httpClient.GetAsync($"{ this.urlBase }/Movie");
+                
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string apiResult = await response.Content.ReadAsStringAsync();
-
-                        movieList = JsonConvert.DeserializeObject<MovieListResponse>(apiResult);
-                    }
-                    else
-                    {
-                           // ponemos x logica
-                    }
-                }
+                movieList = await this.movieApiServices.GetMovies();
                 return View(movieList.data);
             }
             catch (Exception ex)
@@ -68,6 +59,7 @@ namespace ItlaFlixApp.WEB.Controllers
 
             try
             {
+
                 using (var httpClient = new HttpClient(this.handler))
                 {
                     var response = await httpClient.GetAsync($"{this.urlBase}/Movie/{id}");
@@ -80,7 +72,7 @@ namespace ItlaFlixApp.WEB.Controllers
                     }
                     else
                     {
-                        // ponemos x logica
+                        Console.WriteLine("Esta Dando error de lo mio");
                     }
                 }
                 return View(detailResponse.data);
@@ -108,27 +100,18 @@ namespace ItlaFlixApp.WEB.Controllers
             CommadResponse commadResponse = new CommadResponse();
             try
             {
-                using (var httpClient = new HttpClient(this.handler))
+                commadResponse = await this.movieApiServices.Save(createRequest);
+
+                if (commadResponse.success)
                 {
-                    StringContent content = new StringContent(JsonConvert.SerializeObject(createRequest), Encoding.UTF8, "application/json");
-
-                    var response = await httpClient.PostAsync($"{this.urlBase}/Movie/SaveMovie", content);
-
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-
-                    commadResponse = JsonConvert.DeserializeObject<CommadResponse>(apiResponse);
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        return RedirectToAction(nameof(Index));
-                    }
-                    else
-                    {
-                        ViewBag.Message = commadResponse.message;
-                        return View();
-                    }
-
+                    return RedirectToAction(nameof(Index));
                 }
+                else 
+                {
+                    ViewBag.Message = commadResponse.message;
+                    return View();
+                }
+                
             }
             catch
             {
@@ -154,7 +137,7 @@ namespace ItlaFlixApp.WEB.Controllers
                     }
                     else
                     {
-                        // ponemos x logica
+                        Console.WriteLine("Esta Dando error de lo mio");
                     }
                 }
                 return View(detailResponse.data);
@@ -175,25 +158,19 @@ namespace ItlaFlixApp.WEB.Controllers
             CommadResponse commadResponse = new CommadResponse();
             try
             {
-                
-                using (var httpClient = new HttpClient(this.handler)) 
-                {
-                    StringContent request = new StringContent(JsonConvert.SerializeObject(movieUpdate), Encoding.UTF8, "application/json");
+                commadResponse = await this.movieApiServices.Update(movieUpdate);
 
-                    var response = await httpClient.PutAsync($"{this.urlBase}/Movie/UpdateMovie", request);
-                    string apiResult = await response.Content.ReadAsStringAsync();
-                    commadResponse = JsonConvert.DeserializeObject<CommadResponse>(apiResult); 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        return RedirectToAction(nameof(Index));
-                    }
-                    else 
-                    {
-                        ViewBag.Message = commadResponse.message;
-                        return View();
-                    }
+                if (commadResponse.success)
+                {
+                    return RedirectToAction(nameof(Index));
                 }
-                    
+                else
+                {
+                    ViewBag.Message = commadResponse.message;
+                    return View();
+                }
+
+                
 
 
             }

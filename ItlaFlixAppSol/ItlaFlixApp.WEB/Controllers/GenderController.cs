@@ -1,4 +1,5 @@
 ﻿using GSF.Console;
+using ItlaFlixApp.WEB.ApiServices.Interfaces;
 using ItlaFlixApp.WEB.Models;
 using ItlaFlixApp.WEB.Models.Requests;
 using ItlaFlixApp.WEB.Models.Responses;
@@ -19,14 +20,17 @@ namespace ItlaFlixApp.WEB.Controllers
     {
         HttpClientHandler handler = new HttpClientHandler();
         private readonly IConfiguration configuration;
+        private readonly IGenderApiServices genderApiServices;
         private readonly string urlBase;
 
         public ILogger<GenderController> Logger { get; }
 
-        public GenderController(ILogger<GenderController> logger, IConfiguration configuration)
+        public GenderController(ILogger<GenderController> logger, IConfiguration configuration,
+                                                         IGenderApiServices genderApiServices)
         {
             Logger = logger;
             this.configuration = configuration;
+            this.genderApiServices = genderApiServices;
             this.urlBase = this.configuration["apiConfig:baseURL"];
         }
         public async Task<ActionResult> Index()
@@ -36,27 +40,15 @@ namespace ItlaFlixApp.WEB.Controllers
 
             try
             {
-                using (var httpClient = new HttpClient(this.handler))
-                {
-                    var response = await httpClient.GetAsync($"{ this.urlBase }/Gender");
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string apiResult = await response.Content.ReadAsStringAsync();
 
-                        genderList = JsonConvert.DeserializeObject<GenderListResponse>(apiResult);
-                    }
-                    else
-                    {
-                        // ponemos x logica
-                    }
-                }
+                genderList = await this.genderApiServices.GetGenders();
                 return View(genderList.data);
             }
             catch (Exception ex)
             {
 
-                this.Logger.LogError("Error obteniendo las genero ", ex.ToString());
+                this.Logger.LogError("Error obteniendo el genero ", ex.ToString());
             }
             return View();
         }
@@ -68,7 +60,8 @@ namespace ItlaFlixApp.WEB.Controllers
 
             try
             {
-                using (var httpClient = new HttpClient(this.handler)) 
+
+                using (var httpClient = new HttpClient(this.handler))
                 {
                     var response = await httpClient.GetAsync($"{this.urlBase}/Gender/{id}");
 
@@ -80,7 +73,7 @@ namespace ItlaFlixApp.WEB.Controllers
                     }
                     else
                     {
-                        // ponemos x logica
+                        Console.WriteLine("Esta Dando error de lo mio");
                     }
                 }
                 return View(detailResponse.data);
@@ -88,8 +81,9 @@ namespace ItlaFlixApp.WEB.Controllers
             catch (Exception ex)
             {
 
-                this.Logger.LogError("No se pudo mostrar el detalle de la genero", ex.ToString());
+                this.Logger.LogError("No se pudo mostrar el genero", ex.ToString());
             }
+
             return View();
         }
 
@@ -107,28 +101,18 @@ namespace ItlaFlixApp.WEB.Controllers
             CommadResponse commadResponse = new CommadResponse();
             try
             {
-                using (var httpClient = new HttpClient(this.handler))
+                commadResponse = await this.genderApiServices.Save(createRequest);
+
+                if (commadResponse.success)
                 {
-                    StringContent content = new StringContent(JsonConvert.SerializeObject(createRequest), Encoding.UTF8, "application/json");
-
-                    var response = await httpClient.PostAsync($"{this.urlBase}/Gender/SaveGender", content);
-
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-
-                    commadResponse = JsonConvert.DeserializeObject<CommadResponse>(apiResponse);
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        return RedirectToAction(nameof(Index));
-                    }
-                    else
-                    {
-                        ViewBag.Message = commadResponse.message;
-                        return View();
-                    }
-
-
+                    return RedirectToAction(nameof(Index));
                 }
+                else
+                {
+                    ViewBag.Message = commadResponse.message;
+                    return View();
+                }
+                
             }
             catch
             {
