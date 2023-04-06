@@ -13,6 +13,7 @@ namespace ItlaFlixApp.WEB.ApiServices.Services
 {
     public class GenderApiServices : IGenderApiServices
     {
+        HttpClientHandler handler = new HttpClientHandler();
         private readonly IConfiguration configuration;
         private readonly ILogger<GenderApiServices> logger;
         private readonly IHttpClientFactory httpClientFactory;
@@ -29,31 +30,32 @@ namespace ItlaFlixApp.WEB.ApiServices.Services
         }
         public async Task<GenderDetailResponse> GetGender(int id)
         {
-            GenderDetailResponse response = new GenderDetailResponse();
+            GenderDetailResponse detailResponse = new GenderDetailResponse();
             try
             {
-                using (var httpClient = this.httpClientFactory.CreateClient())
+                using (var httpClient = new HttpClient(this.handler))
                 {
-                    using (var resp = await httpClient.GetAsync($"{this.urlBase}/Gender" + id))
+                    var response = await httpClient.GetAsync($"{this.urlBase}/Gender/{id}");
+                    if (response.IsSuccessStatusCode)
                     {
-                        if (resp.IsSuccessStatusCode)
-                        {
-                            string jsonResp = await resp.Content.ReadAsStringAsync();
-                            response = JsonConvert.DeserializeObject<GenderDetailResponse>(jsonResp);
+                        string apiResult = await response.Content.ReadAsStringAsync();
+                        detailResponse = JsonConvert.DeserializeObject<GenderDetailResponse>(apiResult);
+                    }
+                    else
+                    {
 
-                        }
+
 
                     }
                 }
-
             }
             catch (Exception ex)
             {
-                response.success = false;
-                response.message = this.configuration["errorMessage:errorGetGenders"];
-                this.logger.LogError($" {response.message} : {ex.Message}", ex.ToString());
+                detailResponse.success = false;
+                detailResponse.message = this.configuration["departmentMessages:errorGetGender"];
+                this.logger.LogError($"{detailResponse.message} : {ex.Message}", ex.ToString());
             }
-            return response;
+            return detailResponse;
         }
 
         public async Task<GenderListResponse> GetGenders()
