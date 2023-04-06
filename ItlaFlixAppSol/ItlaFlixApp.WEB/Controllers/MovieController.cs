@@ -60,21 +60,10 @@ namespace ItlaFlixApp.WEB.Controllers
             try
             {
 
-                using (var httpClient = new HttpClient(this.handler))
-                {
-                    var response = await httpClient.GetAsync($"{this.urlBase}/Movie/{id}");
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string apiResult = await response.Content.ReadAsStringAsync();
-
-                        detailResponse = JsonConvert.DeserializeObject<MovieDetailResponse>(apiResult);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Esta Dando error de lo mio");
-                    }
-                }
+                detailResponse = await this.movieApiServices.GetMovie(id);
+                    
+                
                 return View(detailResponse.data);
             }
             catch (Exception ex)

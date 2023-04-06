@@ -34,7 +34,7 @@ namespace ItlaFlixApp.WEB.ApiServices.Services
             {
                 using (var httpClient = this.httpClientFactory.CreateClient())
                 {
-                    using (var resp = await httpClient.GetAsync($"{this.urlBase}/Gender"))
+                    using (var resp = await httpClient.GetAsync($"{this.urlBase}/Gender" + id))
                     {
                         if (resp.IsSuccessStatusCode)
                         {

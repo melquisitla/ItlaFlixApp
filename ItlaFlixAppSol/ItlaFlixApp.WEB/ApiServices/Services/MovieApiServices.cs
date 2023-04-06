@@ -45,10 +45,7 @@ namespace ItlaFlixApp.WEB.ApiServices.Services
                             string apiResponse = await response.Content.ReadAsStringAsync();
                             movieResponse = JsonConvert.DeserializeObject<MovieDetailResponse>(apiResponse);
                         }
-                        else
-                        {
-                            // realizar x logica //       
-                        }
+                        
 
                     }
 
@@ -56,9 +53,9 @@ namespace ItlaFlixApp.WEB.ApiServices.Services
             }
             catch (Exception ex)
             {
-                movieResponse.message = "Error obteniendo la pelicula";
+                movieResponse.message = this.configuration["errorMessage:errorGetMovies"];
                 movieResponse.success = false;
-                this.logger.LogError(movieResponse.message, ex.ToString());
+                this.logger.LogError($" {movieResponse.message} : {ex.Message}", ex.ToString());
             }
 
             return movieResponse;

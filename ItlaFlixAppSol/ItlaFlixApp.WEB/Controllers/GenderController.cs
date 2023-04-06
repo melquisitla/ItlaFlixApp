@@ -61,27 +61,16 @@ namespace ItlaFlixApp.WEB.Controllers
             try
             {
 
-                using (var httpClient = new HttpClient(this.handler))
-                {
-                    var response = await httpClient.GetAsync($"{this.urlBase}/Gender/{id}");
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string apiResult = await response.Content.ReadAsStringAsync();
+                detailResponse = await this.genderApiServices.GetGender(id);
 
-                        detailResponse = JsonConvert.DeserializeObject<GenderDetailResponse>(apiResult);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Esta Dando error de lo mio");
-                    }
-                }
+
                 return View(detailResponse.data);
             }
             catch (Exception ex)
             {
 
-                this.Logger.LogError("No se pudo mostrar el genero", ex.ToString());
+                this.Logger.LogError("No se pudo mostrar el detalle del ", ex.ToString());
             }
 
             return View();
