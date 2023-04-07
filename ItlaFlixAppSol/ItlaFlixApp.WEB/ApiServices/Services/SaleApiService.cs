@@ -40,6 +40,11 @@ namespace ItlaFlixApp.WEB.ApiServices.Services
                             string jsonResp = await resp.Content.ReadAsStringAsync();
                             response = JsonConvert.DeserializeObject<SaleDetailResponse>(jsonResp);
                         }
+                        else
+                        {
+                            response.success = false;
+                            response.message = this.configuration["error:errorGetSale"];
+                        }
                     }
                 }
             }
@@ -68,6 +73,11 @@ namespace ItlaFlixApp.WEB.ApiServices.Services
                         {
                             string jsonResp = await resp.Content.ReadAsStringAsync();
                             response = JsonConvert.DeserializeObject<SaleListResponse>(jsonResp);
+                        }
+                        else
+                        {
+                            response.success = false;
+                            response.message = this.configuration["error:errorGetSales"];
                         }
 
                     }
@@ -104,6 +114,11 @@ namespace ItlaFlixApp.WEB.ApiServices.Services
                             string jsonResp = await resp.Content.ReadAsStringAsync();
                             response = JsonConvert.DeserializeObject<CommadResponse>(jsonResp);
                         }
+                        else
+                        {
+                            response.success = false;
+                            response.message = this.configuration["error:errorSaveSale"];
+                        }
 
                     }
                 }
@@ -111,7 +126,7 @@ namespace ItlaFlixApp.WEB.ApiServices.Services
             catch (Exception ex)
             {
                 response.success = false;
-                response.message = this.configuration["error:errorSaveSales"];
+                response.message = this.configuration["error:errorSaveSale"];
                 this.logger.LogError($" {response.message} : {ex.Message}", ex.ToString());
             }
 
@@ -138,6 +153,11 @@ namespace ItlaFlixApp.WEB.ApiServices.Services
                             string jsonResp = await resp.Content.ReadAsStringAsync();
                             response = JsonConvert.DeserializeObject<CommadResponse>(jsonResp);
                         }
+                        else
+                        {
+                            response.success = false;
+                            response.message = this.configuration["error:errorUpdateSale"];
+                        }
 
                     }
                 }
@@ -145,7 +165,7 @@ namespace ItlaFlixApp.WEB.ApiServices.Services
             catch (Exception ex)
             {
                 response.success = false;
-                response.message = this.configuration["error:errorUpdateSales"];
+                response.message = this.configuration["error:errorUpdateSale"];
                 this.logger.LogError($" {response.message} : {ex.Message}", ex.ToString());
             }
 

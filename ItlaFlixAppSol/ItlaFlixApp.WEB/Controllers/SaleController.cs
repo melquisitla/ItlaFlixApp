@@ -1,15 +1,12 @@
-﻿using GSF.Console;
-using ItlaFlixApp.WEB.ApiServices.Interfaces;
+﻿using ItlaFlixApp.WEB.ApiServices.Interfaces;
 using ItlaFlixApp.WEB.Models.Requests;
 using ItlaFlixApp.WEB.Models.Responses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using System;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ItlaFlixApp.WEB.Controllers

@@ -54,21 +54,8 @@ namespace ItlaFlixApp.WEB.Controllers
 
             try
             {
-                using (var httpClient = new HttpClient(this.handler))
-                {
-                    var response = await httpClient.GetAsync( $"{ this.urlBase }/User/{ id }");
+                detailResponse = await this.userApiService.GetUser(id);
 
-                    if (response.IsSuccessStatusCode )
-                    {
-                        string apiResult = await response.Content.ReadAsStringAsync();
-
-                        detailResponse = JsonConvert.DeserializeObject<UserDetailResponse>(apiResult);
-                    }
-                    else
-                    {
-                        // logica por hacer
-                    }
-                }
                 return View(detailResponse.data);
             }
             catch (Exception ex)
@@ -79,7 +66,6 @@ namespace ItlaFlixApp.WEB.Controllers
             return View();
         }
 
-        // GET: UserController/Create
         public ActionResult Create()
         {
             return View();
@@ -93,25 +79,15 @@ namespace ItlaFlixApp.WEB.Controllers
 
             try
             {
-                using (var httpClient = new HttpClient(this.handler))
+                commadResponse = await this.userApiService.Save(createRequest);
+                if (commadResponse.success)
                 {
-                    StringContent request = new StringContent(JsonConvert.SerializeObject(createRequest), Encoding.UTF8, "application/json");
-
-                    var response = await httpClient.PostAsync($"{this.urlBase}/User/SaveUser", request);
-
-                    string apiResult = await response.Content.ReadAsStringAsync();
-
-                    commadResponse = JsonConvert.DeserializeObject<CommadResponse>(apiResult);
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        return RedirectToAction(nameof(Index));
-                    }
-                    else
-                    {
-                        ViewBag.Message = commadResponse.message;
-                        return View();
-                    }
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    ViewBag.Message = commadResponse.message;
+                    return View();
                 }
             }
             catch
@@ -126,21 +102,8 @@ namespace ItlaFlixApp.WEB.Controllers
 
             try
             {
-                using (var httpClient = new HttpClient(this.handler))
-                {
-                    var response = await httpClient.GetAsync($"{this.urlBase}/User/{id}");
+                detailResponse = await this.userApiService.GetUser(id);
 
-                    if (response.IsSuccessStatusCode )
-                    {
-                        String apiResult = await response.Content.ReadAsStringAsync();
-
-                        detailResponse = JsonConvert.DeserializeObject<UserDetailResponse>(apiResult);
-                    }
-                    else
-                    {
-                        // Logica por hacer
-                    }
-                }
                 return View(detailResponse.data);
 
             }
@@ -159,25 +122,15 @@ namespace ItlaFlixApp.WEB.Controllers
             CommadResponse commadResponse = new CommadResponse();
             try
             {
-                using (var httpClient = new HttpClient(this.handler))
+                commadResponse = await this.userApiService.Update(userUpdate);
+                if (commadResponse.success)
                 {
-                    StringContent request = new StringContent(JsonConvert.SerializeObject(userUpdate), Encoding.UTF8, "application/json");
-
-                    var response = await httpClient.PutAsync($"{this.urlBase}/User/UpdateUser", request);
-                    
-                    string apiResult = await response.Content.ReadAsStringAsync();
-
-                    commadResponse = JsonConvert.DeserializeObject<CommadResponse>(apiResult);
-                        
-                    if (response.IsSuccessStatusCode )
-                    {
-                        return RedirectToAction(nameof(Index));
-                    }
-                    else
-                    {
-                        ViewBag.Message = commadResponse.message; 
-                        return View();
-                    }
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    ViewBag.Message = commadResponse.message;
+                    return View();
                 }
             }
             catch

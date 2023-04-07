@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace ItlaFlixApp.WEB.ApiServices.Services
@@ -25,9 +26,37 @@ namespace ItlaFlixApp.WEB.ApiServices.Services
             this.urlBase = this.configuration["apiConfig:baseUrl"];
         }
 
-        public Task<UserDetailResponse> GetUser(int id)
+        public async Task<UserDetailResponse> GetUser(int id)
         {
-            throw new System.NotImplementedException();
+            UserDetailResponse response = new UserDetailResponse();
+            try
+            {
+                using (var HttpCliente = this.httpClientFactory.CreateClient())
+                {
+                    using (var resp = await HttpCliente.GetAsync($"{this.urlBase}/User/{id}"))
+                    {
+                        if (resp.IsSuccessStatusCode)
+                        {
+                            string jsonResp = await resp.Content.ReadAsStringAsync();
+                            response = JsonConvert.DeserializeObject<UserDetailResponse>(jsonResp);
+                        }
+                        else
+                        {
+                            response.success = false;
+                            response.message = this.configuration["error:errorGetUser"];
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                response.success = false;
+                response.message = this.configuration["error:errorGetUser"];
+                this.logger.LogError($" {response.message} : {ex.Message}", ex.ToString());
+            }
+
+
+            return response;
         }
 
         public async Task<UserListResponse> GetUsers()
@@ -45,6 +74,11 @@ namespace ItlaFlixApp.WEB.ApiServices.Services
                             string jsonResp = await resp.Content.ReadAsStringAsync();
                             response = JsonConvert.DeserializeObject<UserListResponse>(jsonResp);
                         }
+                        else
+                        {
+                            response.success = false;
+                            response.message = this.configuration["error:errorGetUsers"];
+                        }
 
                     }
                 }
@@ -59,14 +93,80 @@ namespace ItlaFlixApp.WEB.ApiServices.Services
             return response;
         }
 
-        public Task<CommadResponse> Save(UserCreateRequest userCreate)
+        public async Task<CommadResponse> Save(UserCreateRequest userCreate)
         {
-            throw new System.NotImplementedException();
+            CommadResponse response = new CommadResponse();
+
+            try
+            {
+                using (var HttpCliente = this.httpClientFactory.CreateClient())
+                {
+
+                    StringContent request = new StringContent(JsonConvert.SerializeObject(userCreate), Encoding.UTF8, "application/json");
+
+                    using (var resp = await HttpCliente.PostAsync($"{this.urlBase}/User/SaveUser", request))
+                    {
+
+                        if (resp.IsSuccessStatusCode)
+                        {
+                            string jsonResp = await resp.Content.ReadAsStringAsync();
+                            response = JsonConvert.DeserializeObject<CommadResponse>(jsonResp);
+                        }
+                        else
+                        {
+                            response.success = false;
+                            response.message = this.configuration["error:errorSaveUser"];
+                        }
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                response.success = false;
+                response.message = this.configuration["error:errorSaveUser"];
+                this.logger.LogError($" {response.message} : {ex.Message}", ex.ToString());
+            }
+
+            return response;
         }
 
-        public Task<CommadResponse> Update(UserUpdateRequest userUpdate)
+        public async Task<CommadResponse> Update(UserUpdateRequest userUpdate)
         {
-            throw new System.NotImplementedException();
+            CommadResponse response = new CommadResponse();
+
+            try
+            {
+                using (var HttpCliente = this.httpClientFactory.CreateClient())
+                {
+                    StringContent request = new StringContent(JsonConvert.SerializeObject(userUpdate), Encoding.UTF8, "application/json");
+
+                    using (var resp = await HttpCliente.PutAsync($"{this.urlBase}/User/UpdateUser", request))
+                    {
+
+                        if (resp.IsSuccessStatusCode)
+                        {
+                            string jsonResp = await resp.Content.ReadAsStringAsync();
+                            response = JsonConvert.DeserializeObject<CommadResponse>(jsonResp);
+                        }
+                        else
+                        {
+                            response.success = false;
+                            response.message = this.configuration["error:errorUpdateUser"];
+                        }
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                response.success = false;
+                response.message = this.configuration["error:errorUpdateUser"];
+                this.logger.LogError($" {response.message} : {ex.Message}", ex.ToString());
+            }
+
+            return response;
         }
+    
     }
 }
