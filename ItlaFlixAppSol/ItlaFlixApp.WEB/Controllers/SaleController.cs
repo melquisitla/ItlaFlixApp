@@ -71,7 +71,6 @@ namespace ItlaFlixApp.WEB.Controllers
             return View();
         }
 
-        // POST: SaleController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(SaleCreateRequest createRequest)
@@ -104,21 +103,7 @@ namespace ItlaFlixApp.WEB.Controllers
 
             try
             {
-                using (var httpClient = new HttpClient(this.handler))
-                {
-                    var response = await httpClient.GetAsync($"{this.urlBase}/Sale/{id}");
-
-                    if(response.IsSuccessStatusCode)
-                    {
-                        string apiResult = await response.Content.ReadAsStringAsync();
-
-                        detailResponse = JsonConvert.DeserializeObject<SaleDetailResponse>(apiResult);
-                    }
-                    else
-                    {
-                        // Logica por hacer
-                    }
-                }
+                detailResponse = await this.saleApiService.GetSale(id);
 
                 return View(detailResponse.data);
             }
@@ -137,26 +122,15 @@ namespace ItlaFlixApp.WEB.Controllers
             CommadResponse commadResponse = new CommadResponse();
             try
             {
-                using  (var httpClient = new HttpClient(this.handler))
+                commadResponse = await this.saleApiService.Update(saleUpdate);
+                if (commadResponse.success)
                 {
-                    StringContent request = new StringContent(JsonConvert.SerializeObject(saleUpdate), Encoding.UTF8, "application/json");
-
-                    var response = await httpClient.PutAsync($"{this.urlBase}/Sale/UpdateSale", request);
-                   
-                    string apiResult = await response.Content.ReadAsStringAsync();
-
-                    commadResponse = JsonConvert.DeserializeObject<CommadResponse>(apiResult);
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        return RedirectToAction(nameof(Index));
-                    }
-                    else
-                    {
-                        ViewBag.Message = commadResponse.message;
-                        return View();
-                    }
-
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    ViewBag.Message = commadResponse.message;
+                    return View();
                 }
             }
             catch

@@ -118,9 +118,38 @@ namespace ItlaFlixApp.WEB.ApiServices.Services
             return response;
         }
 
-        public Task<CommadResponse> Update(SaleUpdateRequest saleUpdate)
+        public async Task<CommadResponse> Update(SaleUpdateRequest saleUpdate)
         {
-            throw new System.NotImplementedException();
+            CommadResponse response = new CommadResponse();
+
+            try
+            {
+                using (var HttpCliente = this.httpClientFactory.CreateClient())
+                {
+                    saleUpdate.fecha = DateTime.Now;
+
+                    StringContent request = new StringContent(JsonConvert.SerializeObject(saleUpdate), Encoding.UTF8, "application/json");
+
+                    using (var resp = await HttpCliente.PutAsync($"{this.urlBase}/Sale/UpdateSale", request))
+                    {
+
+                        if (resp.IsSuccessStatusCode)
+                        {
+                            string jsonResp = await resp.Content.ReadAsStringAsync();
+                            response = JsonConvert.DeserializeObject<CommadResponse>(jsonResp);
+                        }
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                response.success = false;
+                response.message = this.configuration["error:errorUpdateSales"];
+                this.logger.LogError($" {response.message} : {ex.Message}", ex.ToString());
+            }
+
+            return response;
         }
     }
 }
