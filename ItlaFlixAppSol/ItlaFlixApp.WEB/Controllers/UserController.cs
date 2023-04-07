@@ -1,4 +1,5 @@
 ﻿using GSF.Console;
+using ItlaFlixApp.WEB.ApiServices.Interfaces;
 using ItlaFlixApp.WEB.Models.Requests;
 using ItlaFlixApp.WEB.Models.Responses;
 using Microsoft.AspNetCore.Http;
@@ -19,12 +20,14 @@ namespace ItlaFlixApp.WEB.Controllers
         HttpClientHandler handler = new HttpClientHandler();
         private readonly ILogger<UserController> logger;
         private readonly IConfiguration configuration;
+        private readonly IUserApiService userApiService;
         private readonly string urlBase;
 
-        public UserController(ILogger<UserController> logger, IConfiguration configuration)
+        public UserController(ILogger<UserController> logger, IConfiguration configuration, IUserApiService userApiService)
         {
             this.logger = logger;
             this.configuration = configuration;
+            this.userApiService = userApiService;
             this.urlBase = this.configuration["apiConfig:baseUrl"];
         }
 
@@ -34,20 +37,8 @@ namespace ItlaFlixApp.WEB.Controllers
             UserListResponse userList = new UserListResponse();
             try
             {
-                using (var HttpClient  = new HttpClient(this.handler))
-                {
-                    var response = await HttpClient.GetAsync($"{this.urlBase}/User");
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string apiResult = await response.Content.ReadAsStringAsync();
+                userList = await this.userApiService.GetUsers();
 
-                        userList = JsonConvert.DeserializeObject<UserListResponse>(apiResult);
-                    }
-                    else
-                    {
-                        // Crear logica
-                    }
-                }
                 return View(userList.data);
             }
             catch (System.Exception)

@@ -1,4 +1,5 @@
 ﻿using GSF.Console;
+using ItlaFlixApp.WEB.ApiServices.Interfaces;
 using ItlaFlixApp.WEB.Models.Requests;
 using ItlaFlixApp.WEB.Models.Responses;
 using Microsoft.AspNetCore.Http;
@@ -18,12 +19,14 @@ namespace ItlaFlixApp.WEB.Controllers
         HttpClientHandler handler = new  HttpClientHandler();
         private readonly ILogger<SaleController> logger;
         private readonly IConfiguration configuration;
+        private readonly ISaleApiService saleApiService;
         private readonly string urlBase;
 
-        public SaleController(ILogger<SaleController> logger, IConfiguration configuration) 
+        public SaleController(ILogger<SaleController> logger, IConfiguration configuration, ISaleApiService saleApiService) 
         {
             this.logger = logger;
             this.configuration = configuration;
+            this.saleApiService = saleApiService;
             this.urlBase = this.configuration["apiConfig:baseUrl"];
         }
 
@@ -33,20 +36,7 @@ namespace ItlaFlixApp.WEB.Controllers
 
             try
             {
-                using (var httpClient = new HttpClient(this.handler)) 
-                {
-                    var response = await httpClient.GetAsync($"{ this.urlBase }/Sale");
-                    if (response.IsSuccessStatusCode)  
-                    {
-                        string apiResult = await response.Content.ReadAsStringAsync();
-
-                        saleList = JsonConvert.DeserializeObject<SaleListResponse>(apiResult);
-                    }
-                    else
-                    {
-                        // Crear logica 
-                    }
-                }
+                saleList = await this.saleApiService.GetSales();
 
                 return View(saleList.data);
             }
@@ -64,21 +54,8 @@ namespace ItlaFlixApp.WEB.Controllers
 
             try
             {
-                using (var httpClient = new HttpClient(this.handler))
-                {
-                    var response = await httpClient.GetAsync($"{this.urlBase}/Sale/{id}");
+                detailResponse = await this.saleApiService.GetSale(id);
 
-                    if (response.IsSuccessStatusCode) 
-                    {
-                        string apiResult = await response.Content.ReadAsStringAsync();
-
-                        detailResponse = JsonConvert.DeserializeObject<SaleDetailResponse>(apiResult);
-                    }
-                    else
-                    {
-                        // Logic apor hacer
-                    }
-                }
                 return View(detailResponse.data);
             }
             catch (Exception ex)
@@ -100,30 +77,20 @@ namespace ItlaFlixApp.WEB.Controllers
         public async Task<ActionResult> Create(SaleCreateRequest createRequest)
         {
             CommadResponse commadResponse = new CommadResponse();
+
             try
             {
-                using (var httpClient = new HttpClient(this.handler))
+                commadResponse = await this.saleApiService.Save(createRequest);
+                if (commadResponse.success)
                 {
-                    createRequest.fecha = DateTime.Now;
-
-                    StringContent request = new StringContent(JsonConvert.SerializeObject(createRequest), Encoding.UTF8, "application/json");
-
-                    var response = await httpClient.PostAsync($"{this.urlBase}/Sale/SaveSale", request);
-
-                    string apiResult = await response.Content.ReadAsStringAsync();
-
-                    commadResponse = JsonConvert.DeserializeObject<CommadResponse>(apiResult);
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        return RedirectToAction(nameof(Index));
-                    }
-                    else
-                    {
-                        ViewBag.Message = commadResponse.message;
-                        return View();
-                    }
+                    return RedirectToAction(nameof(Index));
                 }
+                else
+                {
+                    ViewBag.Message = commadResponse.message;
+                    return View();
+                }
+
             }
             catch
             {
