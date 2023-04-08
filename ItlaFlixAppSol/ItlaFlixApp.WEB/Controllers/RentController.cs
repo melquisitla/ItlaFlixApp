@@ -1,16 +1,13 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using ItlaFlixApp.WEB.Models;
 using System.Net.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using System.Text;
+using ItlaFlixApp.WEB.ApiServices.Interfaces;
 using ItlaFlixApp.WEB.Models.Response;
-using System.Text.Json.Serialization;
 using ItlaFlixApp.WEB.Models.Request;
 
 namespace ItlaFlixApp.WEB.Controllers
@@ -19,44 +16,32 @@ namespace ItlaFlixApp.WEB.Controllers
     {
         HttpClientHandler handler = new HttpClientHandler();
         private readonly IConfiguration configuration;
+        private readonly IRentApiServices rentApiServices;
         private readonly string urlBase;
 
         public ILogger<RentController> Logger { get; }
 
-        public RentController(ILogger<RentController> logger, IConfiguration configuration)
+        public RentController(ILogger<RentController> logger, IConfiguration configuration, IRentApiServices rentApiServices)
         {
             Logger = logger;
             this.configuration = configuration;
+            this.rentApiServices = rentApiServices;
             this.urlBase = this.configuration["apiConfig:baseURL"];
         }
 
         public async Task<ActionResult> Index()
         {
-           RentListResponse rentList = new RentListResponse();
-           //CommadResponse commadResponse = new CommadResponse();
+            RentListResponse rentList = new RentListResponse();
+
             try
             {
-                using (var httpClient = new HttpClient(this.handler))
-                {
-                    var response = await httpClient.GetAsync($"{this.urlBase}/Rent");
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string apiResult = await response.Content.ReadAsStringAsync();
-
-                        rentList = JsonConvert.DeserializeObject<RentListResponse>(apiResult);
-                    }
-                    else
-                    {
-                        // ponemos x logica
-                    }
-                }
+                rentList = await this.rentApiServices.GetRents();
                 return View(rentList.data);
             }
             catch (Exception ex)
             {
 
-                this.Logger.LogError("Error alquilando las peliculas ", ex.ToString());
+                this.Logger.LogError("Error rentando las peliculas ", ex.ToString());
             }
             return View();
         }
@@ -68,27 +53,15 @@ namespace ItlaFlixApp.WEB.Controllers
 
             try
             {
-                using (var httpClient = new HttpClient(this.handler))
-                {
-                    var response = await httpClient.GetAsync($"{this.urlBase}/Rent/{id}");
+                detailResponse =await this.rentApiServices.GetRent(id);
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string apiResult = await response.Content.ReadAsStringAsync();
 
-                        detailResponse = JsonConvert.DeserializeObject<RentDetailResponse>(apiResult);
-                    }
-                    else
-                    {
-                        // ponemos x logica
-                    }
-                }
                 return View(detailResponse.data);
             }
             catch (Exception ex)
             {
 
-                this.Logger.LogError("No se pudo rentar esta pelicula", ex.ToString());
+                this.Logger.LogError("No se pudo mostrar el detalle de la renta de la  pelicula", ex.ToString());
             }
 
             return View();
@@ -108,26 +81,18 @@ namespace ItlaFlixApp.WEB.Controllers
             CommadResponse commadResponse = new CommadResponse();
             try
             {
-                using (var httpClient = new HttpClient(this.handler))
+                commadResponse = await this.rentApiServices.Save(createRequest);
+
+                if (commadResponse.success)
                 {
-                    StringContent content = new StringContent(JsonConvert.SerializeObject(createRequest), Encoding.UTF8, "application/json");
-
-                    var response = await httpClient.PostAsync($"{this.urlBase}/Rent/SaveRent", content);
-
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                    commadResponse = JsonConvert.DeserializeObject<CommadResponse>(apiResponse);
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        return RedirectToAction(nameof(Index));
-                    }
-                    else
-                    {
-                        ViewBag.Message = commadResponse.message;
-                        return View();
-                    }
-
+                    return RedirectToAction(nameof(Index));
                 }
+                else
+                {
+                    ViewBag.Message = commadResponse.message;
+                    return View();
+                }
+
             }
             catch
             {
@@ -153,7 +118,7 @@ namespace ItlaFlixApp.WEB.Controllers
                     }
                     else
                     {
-                        // ponemos x logica
+                        Console.WriteLine("Esta dando error ");
                     }
                 }
                 return View(detailResponse.data);
@@ -161,7 +126,7 @@ namespace ItlaFlixApp.WEB.Controllers
             catch (Exception ex)
             {
 
-                this.Logger.LogError("Error apartando la pelicula", ex.ToString());
+                this.Logger.LogError("Error rentando la pelicula", ex.ToString());
             }
 
             return View();
@@ -174,31 +139,22 @@ namespace ItlaFlixApp.WEB.Controllers
             CommadResponse commadResponse = new CommadResponse();
             try
             {
+                commadResponse = await this.rentApiServices.Update(rentUpdate);
 
-                using (var httpClient = new HttpClient(this.handler))
+                if (commadResponse.success)
                 {
-                    StringContent request = new StringContent(JsonConvert.SerializeObject(rentUpdate), Encoding.UTF8, "application/json");
-
-                    var response = await httpClient.PutAsync($"{this.urlBase}/Rent/UpdateRent", request);
-                    string apiResult = await response.Content.ReadAsStringAsync();
-                    commadResponse = JsonConvert.DeserializeObject<CommadResponse>(apiResult);
-                    if (response.IsSuccessStatusCode)
-                    {
-                        return RedirectToAction(nameof(Index));
-                    }
-                    else
-                    {
-                        ViewBag.Message = commadResponse.message;
-                        return View();
-                    }
+                    return RedirectToAction(nameof(Index));
                 }
-
-
+                else
+                {
+                    ViewBag.Message = commadResponse.message;
+                    return View();
+                }
 
             }
             catch (Exception ex)
             {
-                this.Logger.LogError("Error comprando la pelicula", ex.ToString());
+                this.Logger.LogError("Error Alquilando la pelicula", ex.ToString());
                 return View();
             }
         }
