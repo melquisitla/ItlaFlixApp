@@ -11,6 +11,8 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Text;
 using ItlaFlixApp.WEB.Models.Request;
+using ItlaFlixApp.WEB.ApiServices.Services;
+using ItlaFlixApp.WEB.ApiServices.Interfaces;
 
 namespace ItlaFlixApp.WEB.Controllers
 {
@@ -20,12 +22,14 @@ namespace ItlaFlixApp.WEB.Controllers
         private readonly ILogger<MoviesGenderController> Logger;
         private readonly IConfiguration configuration;
         private readonly string urlBase;
+        private readonly IMoviesGenderApiServices apiServices;
 
-        public MoviesGenderController(ILogger<MoviesGenderController> logger, IConfiguration configuration ) 
+        public MoviesGenderController(ILogger<MoviesGenderController> logger, IConfiguration configuration, IMoviesGenderApiServices apiServices ) 
         { 
             this.Logger= logger;
             this.configuration= configuration;
             this.urlBase = this.configuration["apiConfig:baseURL"];
+            this.apiServices= apiServices;
         }
         
         public async Task<ActionResult> Index()
@@ -34,21 +38,7 @@ namespace ItlaFlixApp.WEB.Controllers
 
             try
             {
-                using( var http = new HttpClient(this.handler) )
-                {
-                    var response = await http.GetAsync(urlBase + "/Movies_Gender");
-                    if(response.IsSuccessStatusCode)
-                    {
-                        string apiResult = await response.Content.ReadAsStringAsync();
-
-                        movieGenderResponse = JsonConvert.DeserializeObject<MovieGenderResponse>(apiResult);
-                    }
-                    else
-                    {
-                        // Logica en caso de error con http Request
-                    }
-                }
-
+                movieGenderResponse = await apiServices.GetMoviesGender();
                 return View(movieGenderResponse.data);
 
             }
@@ -112,21 +102,7 @@ namespace ItlaFlixApp.WEB.Controllers
 
             try
             {
-                using (var http = new HttpClient(this.handler))
-                {
-                    var response = await http.GetAsync($"{this.urlBase}//{id}");
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string apiResult = await response.Content.ReadAsStringAsync();
-
-                        responseData = JsonConvert.DeserializeObject<MovieGenderResponse>(apiResult);
-                    }
-                    else
-                    {
-                        // ponemos x logica
-                    }
-                }
+                responseData = await apiServices.GetMovieGender(id);
                 return View(responseData.data);
             }
             catch (Exception ex)
@@ -145,26 +121,36 @@ namespace ItlaFlixApp.WEB.Controllers
             CommadResponse commandResponse = new CommadResponse();
             try
             {
-                using (var http = new HttpClient(this.handler))
+                commandResponse = await this.apiServices.UpdateMovieGender(movieGenderReq);
+                if (commandResponse.Success)
                 {
-                    StringContent request = new StringContent(JsonConvert.SerializeObject(movieGenderReq), Encoding.UTF8, "application/json");
-
-                    var response = await http.PutAsync($"{this.urlBase}/Movies_Gender/UpdateMoviesGender", request);
-                    string apiResult = await response.Content.ReadAsStringAsync();
-                    commandResponse = JsonConvert.DeserializeObject<CommadResponse>(apiResult);
-                    if (response.IsSuccessStatusCode)
-                    {
-                        return RedirectToAction(nameof(Index));
-
-                    }
-                    else
-                    {
-                        ViewBag.Message = commandResponse.Message;
-                        return View();
-                    }
-
+                    return RedirectToAction(nameof(Index));
                 }
+                else
+                {
+                    ViewBag.Message = commandResponse.Message;
+                    return View();
+                }
+                /* using (var http = new HttpClient(this.handler))
+                 {
+                     StringContent request = new StringContent(JsonConvert.SerializeObject(movieGenderReq), Encoding.UTF8, "application/json");
 
+                     var response = await http.PutAsync($"{this.urlBase}/Movies_Gender/UpdateMoviesGender", request);
+                     string apiResult = await response.Content.ReadAsStringAsync();
+                     commandResponse = JsonConvert.DeserializeObject<CommadResponse>(apiResult);
+                     if (response.IsSuccessStatusCode)
+                     {
+                         return RedirectToAction(nameof(Index));
+
+                     }
+                     else
+                     {
+                         ViewBag.Message = commandResponse.Message;
+                         return View();
+                     }
+
+                 }
+                */
 
             }
             catch
